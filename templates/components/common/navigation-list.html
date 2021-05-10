@@ -1,0 +1,212 @@
+{{#if id '!=' '23'}}
+
+{{#if children}}
+
+{{#if id '==' '84' }}
+<a class="navPages-action has-subMenu navPage-custom-Menu-action nav-action-id-{{id}}" href="{{url}}" data-collapsible="navPages-{{id}}">
+    {{name}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down" /></svg></i>
+</a>
+<div class="navPage-subMenu navPage-custom-subMenu" id="navPages-{{id}}" aria-hidden="true" tabindex="-1">
+
+<ul class="navPage-subMenu-list navPage-subMenu-list-mega col-md-3 ">
+
+        <li class="navPage-subMenu-item  _shop-all-action">
+            <a class="navPage-subMenu-action navPages-action no-navPage-custom-subMenu-action" href="{{url}}">{{lang 'category.view_all.name' category=name}}</a>
+        </li>
+        {{#each children}}
+            <li class="navPage-subMenu-item">
+                {{#if children}}
+                    <a
+                        class="navPage-subMenu-action navPages-action has-subMenu navPage-custom-id-{{id}}-action navPage-custom-subMenu-action " data-board-data="navPage-custom-id-{{id}}-content"
+                        href="{{url}}"
+                        data-collapsible="navPages-{{id}}"
+                        data-collapsible-disabled-breakpoint="medium"
+                        data-collapsible-disabled-state="open"
+                        data-collapsible-enabled-state="closed">
+                        {{name}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down" /></svg></i>
+                    </a>
+					<ul class="navPage-childList _nav-open-flag" data-ap-category-url="{{url}}" id="navPages-{{id}}">
+					</ul>
+					
+					<div class="category-menu-item-custom-content navPage-custom-id-{{id}}-content" data-board-data="navPage-custom-id-{{id}}-action" id="navPages-{{id}}" >
+					    <div class="custom-content-title "><a class="navPages-action" href="{{url}}">{{name}} <br> <span class="view-all-label">( View All )</span></a></div>
+					    <div class="custom-content-slides" id="navPages-{{id}}" data-ap-category-url="{{url}}" data-content-parent="navPage-custom-id-{{id}}-content">
+						</div>
+						<img class="loader-ajax-item img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" />
+					</div>
+
+                {{else}}
+					<a class="navPage-subMenu-action navPages-action has-subMenu navPage-custom-id-{{id}}-action navPage-custom-subMenu-action " data-board-data="navPage-custom-id-{{id}}-content" href="{{url}}">{{name}}</a>
+					
+					<div class="category-menu-item-custom-content navPage-custom-id-{{id}}-content" data-board-data="navPage-custom-id-{{id}}-action" id="navPages-{{id}}" >
+					    <div class="custom-content-title "><a class="navPages-action" href="{{url}}">{{name}} <br><span class="view-all-label">( View All )</span></a></div>
+					    <div class="custom-content-slides sn-products" id="navPages-{{id}}" data-ap-category-url="{{url}}" data-content-parent="navPage-custom-id-{{id}}-content">
+						</div>
+						<img class="loader-ajax-item img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" />
+					</div>
+					
+                {{/if}}
+            </li>
+        {{/each}}
+    </ul>
+	
+	<div class="category-menu-custom-content col-md-9 ">
+	
+	
+	</div>
+	<script>
+	
+		var slick_option = {
+        "dots": false,
+        "arrows": true,
+        "mobileFirst": true,
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+        "rows":1,
+		"autoplaySpeed": 600000,
+        "autoplay": false,
+		"infinite": false,
+        "responsive": [
+            {
+                "breakpoint": 1260,
+                "settings": {
+                    "slidesToScroll": 4,
+                    "slidesToShow": 4
+				
+                }
+				
+            },
+			{
+                "breakpoint": 1100,
+                "settings": {
+                    "slidesToScroll": 3,
+                    "slidesToShow": 3
+                }
+            },
+            {
+                "breakpoint": 992,
+                "settings": {
+                    "slidesToScroll": 2,
+                    "slidesToShow": 2
+                }
+            }
+			
+           
+        ]
+    };
+	
+	// 
+	// SLICK SLIDER TWEAKS
+	// 
+
+	function reInitPos(){
+		//jQuery('.navPage-custom-subMenu')
+		jQuery('.category-menu-item-custom-content').each(function(){
+			jQuery(this).find('.custom-content-slides').not('.slick-initialized').slick(slick_option);
+			jQuery(this).appendTo('.category-menu-custom-content');
+		});
+	}
+	reInitPos();
+	
+	function reShowHide(){
+		if(jQuery(window).width() > 991){	
+			jQuery('._nav-open-flag').addClass('_is-not-open');
+			jQuery('.category-menu-item-custom-content').show();	
+		}else{
+			jQuery('._nav-open-flag').removeClass('_is-not-open');
+			jQuery('.category-menu-item-custom-content').hide();
+		}	
+	}
+	reShowHide();
+	
+	function navActionSet(){
+		if(jQuery(window).width() > 991){	
+			
+			function showContent(){
+				jQuery('.category-menu-item-custom-content').hide();					
+				jQuery('.category-menu-item-custom-content').first().show();	
+				
+				_currentHoverMenu = jQuery('.category-menu-item-custom-content').first().attr('data-board-data');
+				jQuery('.navPage-custom-subMenu-action').removeClass('_is-active');
+				jQuery('.'+_currentHoverMenu).addClass('_is-active');
+
+				setTimeout(function(){  jQuery('.'+(_currentHoverMenu.replace('action','content')) + ' .custom-content-slides')[0].slick.refresh();	 }, 10);
+			}
+		
+			// Main menu action
+			jQuery('.navPage-custom-Menu-action').on('mouseenter click', function(e) {
+				showContent();
+			});
+			
+			// Sub menu action
+			
+			
+			var timeoutId;
+			jQuery('.navPage-custom-subMenu-action').on({
+				mouseenter: function () {
+					jQuery('.navPage-custom-subMenu-action').removeClass('_is-active');
+					jQuery(this).addClass('_is-active');
+					_currentActiveSub = jQuery(this).attr('data-board-data');
+					
+					if (!timeoutId) {
+						timeoutId = window.setTimeout(function() {
+							timeoutId = null; // EDIT: added this line
+							
+							jQuery('.category-menu-item-custom-content').hide();					
+							jQuery('.'+_currentActiveSub).show();
+							jQuery('.'+_currentActiveSub + ' .custom-content-slides')[0].slick.refresh();
+							
+					   }, 300);
+					}
+				},
+				mouseleave: function () {
+					clearTimeout(timeoutId);
+					timeoutId = null;
+					
+					//jQuery('.category-menu-item-custom-content').hide();
+				}
+			});
+		
+		}else{
+			// mobile search quick fix
+			jQuery('.mobileMenu-toggle').click(function(){
+				jQuery('form #search_query').val('');
+				jQuery('.quickSearchResults').empty();
+			});
+		}		
+	}
+	
+	jQuery(document).ready(function(){
+		// initiallize web action
+		navActionSet();
+	});
+		
+	jQuery( window ).resize(function() {
+		// reinit on function on resize
+		reShowHide();	
+		navActionSet();
+	});
+	
+	</script>
+</div>
+{{else}}
+
+<a class="navPages-action has-subMenu nav-action-id-{{id}}" href="{{url}}" data-collapsible="navPages-{{id}}">
+    {{name}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down" /></svg></i>
+</a>
+
+<div class="navPage-subMenu" id="navPages-{{id}}" aria-hidden="true" tabindex="-1">
+{{> components/themes/sections/section section="mega"
+mega_id_1=(lang "mega-menu.mega-category-id-1" )
+mega_id_2=(lang "mega-menu.mega-category-id-2" )
+mega_id_3=(lang "mega-menu.mega-category-id-3" )
+mega_id_4=(lang "mega-menu.mega-category-id-4" )
+mega_id_5=(lang "mega-menu.mega-category-id-5" )
+}}
+</div>
+{{/if}}
+
+{{else}}
+<a class="navPages-action" href="{{url}}">{{name}}</a>
+{{/if}}
+{{/if}}

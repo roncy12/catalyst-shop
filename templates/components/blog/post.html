@@ -1,0 +1,101 @@
+<div class=" article--listing">
+        <span class="article__date"><i class="icon-calendar icons"></i>{{post.date_published}}</span>
+        <span class="arrow__date"></span>
+        <article class="blog grid-item">
+            <header class="blog-header">
+                <h2 class="blog-title">
+                    <a href="{{post.url}}">{{post.title}}</a>
+                </h2>
+                <p class="blog-date"><i class="icon-user icons"></i>{{#if post.author}}{{post.author}}{{/if}}</p>
+				
+				{{#if show_top_sc}}
+				{{>components/common/share}}
+				{{/if}}
+				<!--[Hide_Thumbnail_Image]-->
+				
+            </header>
+            <div class="blog-post-figure">
+                {{#if post.thumbnail}}
+					{{#if post.body}}
+					{{#contains post.body '[hide_thumbnail_image]' }}
+					
+					{{else}}
+						<figure class="blog-thumbnail">
+							<a href="{{post.url}}">
+								<img src="{{getImage post.thumbnail 'defaultImage'}}" alt="{{post.thumbnail.alt}}" title="{{post.thumbnail.alt}}">
+							</a>
+						</figure>
+					{{/contains}}
+					{{else}}
+						<figure class="blog-thumbnail">
+							<a href="{{post.url}}">
+								<img src="{{getImage post.thumbnail 'defaultImage'}}" alt="{{post.thumbnail.alt}}" title="{{post.thumbnail.alt}}">
+							</a>
+						</figure>
+					{{/if}}
+					
+					
+                {{/if}}
+            </div>
+            <div class="blog-post-body">
+                <div class="blog-post">
+                    {{#if post.body}}
+						<div class="blog-content">
+                        {{{post.body}}}
+						</div>
+                    {{else}}
+                        {{post.summary}}
+                        {{#if post.show_read_more}}
+                            &hellip; <p class="button-view"><a href="{{url}}">read more</a></p>
+                        {{/if}}
+                    {{/if}}
+                </div>
+        
+        
+                {{#if show_tags}}
+                    {{#if post.tags}}
+                        <ul class="tags">
+                            {{#each post.tags}}
+                            <li class="tag">
+                                <a href="{{url}}">#{{name}}</a>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    {{/if}}
+                {{/if}}
+				
+				{{#if show_bottom_sc}}
+                {{>components/common/share}}
+				{{/if}}
+            </div>
+			
+			{{#if show_prevnext}}
+			<div class="prev-next-pagination">
+				{{> components/common/prevnext/prevnext_script prevnext_param="blogList" prevnext_key=post.url }}
+			</div>
+			{{/if}}
+			
+			{{#if show_disqus}}
+			<div id="disqus_thread"></div>
+			<script>
+
+			/**
+			*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+			*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+			/*
+			var disqus_config = function () {
+			this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+			this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+			};
+			*/
+			(function() { // DON'T EDIT BELOW THIS LINE
+			var d = document, s = d.createElement('script');
+			s.src = 'https://catalystshop.disqus.com/embed.js';
+			s.setAttribute('data-timestamp', +new Date());
+			(d.head || d.body).appendChild(s);
+			})();
+			</script>
+			<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+			{{/if}}
+        </article>
+</div>

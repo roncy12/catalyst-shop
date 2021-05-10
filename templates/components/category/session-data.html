@@ -1,0 +1,49 @@
+	<script>
+		var _site_key = "ctl_";
+
+		var category_url = '{{ category.url }}';
+		if(category_url.indexOf("http") < 0 ){
+			category_url = location.href.split('?')[0];
+		}
+		
+		sessionStorage.setItem(_site_key+'category_id', '{{ category.id }}');
+		localStorage.setItem(_site_key+'category_id', '{{ category.id }}');
+
+		if (sessionStorage.getItem(_site_key+'category_id') !== null) {
+				var _ajax_category_id ='';
+				var	_ajax_category_url='';
+				var start_time = new Date().getTime();
+				jQuery.ajax({ url: category_url+'?limit=100&ajaxLocalStorage=Yes', 
+					success: function(data) { 
+								_ajax_category_id = jQuery('<div />').append(jQuery("#ajaxLocalStorage_category_id", data)).text();
+								_ajax_category_url = jQuery('<div />').append(jQuery("#ajaxLocalStorage_category_url", data)).text();
+
+							if(_ajax_category_id && _ajax_category_url){
+								var _tmpPID = JSON.parse(_ajax_category_id);
+								var _tmpPURL = JSON.parse(_ajax_category_url)
+								var _categoryProducts = {};
+							
+								for (var i = 0; i < _tmpPID.length; i++)
+								_categoryProducts[_tmpPID[i]] = { 	'prev': { 'id' : _tmpPID[i-1], 'url' : _tmpPURL[i-1] },
+																	'next': { 'id' : _tmpPID[i+1], 'url' : _tmpPURL[i+1] }	
+																};
+								localStorage.setItem(_site_key+'category_{{ category.id }}',JSON.stringify(_categoryProducts));
+							
+								var request_time = new Date().getTime() - start_time;
+								console.log('updated session-data - '+request_time);
+							}	
+
+					}
+				});  
+			var _tmpPID = ('{{ pluck  category.products 'id'}}').split(',');
+			var _tmpPURL = ('{{ pluck  category.products 'url'}}').split(',');
+			var _categoryProducts = {};
+		
+			for (var i = 0; i < _tmpPID.length; i++)
+			_categoryProducts[_tmpPID[i]] = { 	'prev': { 'id' : _tmpPID[i-1], 'url' : _tmpPURL[i-1] },
+												'next': { 'id' : _tmpPID[i+1], 'url' : _tmpPURL[i+1] }	
+											};
+			localStorage.setItem(_site_key+'category_{{ category.id }}',JSON.stringify(_categoryProducts));
+		}
+		
+	</script>

@@ -1,0 +1,16 @@
+{{#if children}}
+<a class="navPages-action has-subMenu" href="{{url}}" data-collapsible="navPages-{{id}}">
+    {{name}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down" /></svg></i>
+</a>
+<div class="navPage-subMenu" id="navPages-{{id}}" aria-hidden="true" tabindex="-1">
+{{> components/themes/sections/amp-section section="mega"
+mega_id_1=(lang "mega-menu.mega-category-id-1" )
+mega_id_2=(lang "mega-menu.mega-category-id-2" )
+mega_id_3=(lang "mega-menu.mega-category-id-3" )
+mega_id_4=(lang "mega-menu.mega-category-id-4" )
+mega_id_5=(lang "mega-menu.mega-category-id-5" )
+}}
+</div>
+{{else}}
+<a class="navPages-action" href="{{url}}">{{name}}</a>
+{{/if}}

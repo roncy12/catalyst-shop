@@ -1,0 +1,96 @@
+<style>
+    .heroCarousel._pagespeed{
+        min-height: 160vh;
+    }
+</style>    
+<section class="heroCarousel  _pagespeed">
+    {{#each carousel.slides}}
+		{{#contains url ".mp4"}}
+			<div class="heroCarousel-slide video-slide" data-slideIndex="{{@index}}">
+				<video id="video-banner" class=" heroCarousel-video" preload="auto" width="100%" height="100%" poster="{{image}}" autoplay="autoplay" loop="loop" muted playsinline >
+				   <source  src="{{url}}" type="video/mp4">
+				</video>
+				
+				<img style="display:none;" class=".video-js heroCarousel-gif" src="{{#replace '.mp4' url}}.gif{{/replace}}" alt="{{alt_text}}" title="{{alt_text}}"/>
+				
+				{{#if heading}}
+					{{> components/carousel-content show_background=false}}
+				{{else}}
+					{{#if text}}
+						{{> components/carousel-content show_background=false}}
+					{{else}}
+						{{#if button_text}}
+							{{> components/carousel-content show_background=false}}
+						{{/if}}
+					{{/if}}
+				{{/if}}
+			</div>			
+		{{else}}
+		 <div class="heroCarousel-slide {{#if ../theme_settings.homepage_stretch_carousel_images}}heroCarousel-slide--stretch{{/if}}">
+			<a href="{{url}}">
+			    {{#if @first}}
+				     <img class="heroCarousel-image img-responsive" src="{{image}}" alt="{{alt_text}}" title="{{alt_text}}" style="opacity:0;" />
+			    {{else}}
+			        <img class="heroCarousel-image img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src-delay="{{image}}" alt="{{alt_text}}" title="{{alt_text}}" style="opacity:0;"/>
+			    {{/if}}
+				{{#if heading}}
+					{{> components/carousel-content show_background=false}}
+				{{else}}
+					{{#if text}}
+						{{> components/carousel-content show_background=false}}
+					{{else}}
+						{{#if button_text}}
+							{{> components/carousel-content show_background=false}}
+						{{/if}}
+					{{/if}}
+				{{/if}}
+			</a>	
+		</div>	
+		{{/contains}}
+    {{/each}}
+</section>
+
+<script>
+	var slick_option={
+	        "lazyLoad": 'ondemand',
+			"dots": true,
+			"mobileFirst": true,
+			"slidesToShow": 1,
+			"slidesToScroll": 1,
+			"infinite": true,
+			"autoplay": true,
+			"adaptiveHeight" : true,
+			"autoplaySpeed": {{carousel.swap_frequency}}
+	};
+	jQuery('.heroCarousel').on('init', function(event, slick){
+		//console.log("initialized");
+	});
+	jQuery('.heroCarousel').not('.slick-initialized').slick(slick_option);
+	
+	let _flagOnce = 0;
+	function slideChanger(){
+		if(_flagOnce == 0){	
+			jQuery('.heroCarousel-image').each((i, e) => {
+				jQuery(e).attr('src',jQuery(e).data('src-delay'));
+				jQuery(e).css({'opacity':'1'});
+			});
+		    jQuery('.heroCarousel').removeClass('_pagespeed');
+			_flagOnce = 1;
+			
+		}
+	}
+	
+	// Adjust the height of the slider according to the active item
+    function _adaptiveHeight(){
+        heightActiveSlider = jQuery('.heroCarousel .slick-active').height();
+        jQuery('.heroCarousel .slick-list').height(heightActiveSlider);
+    }
+    
+    // pre-rendered 
+	jQuery(document).on(' mousemove scroll ', function(e){
+		slideChanger();
+		_adaptiveHeight();
+	});
+	
+	
+</script>

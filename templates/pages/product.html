@@ -1,0 +1,102 @@
+---
+product:
+    videos:
+        limit: {{theme_settings.productpage_videos_count}}
+    reviews:
+        limit: {{theme_settings.productpage_reviews_count}}
+    related_products:
+        limit: {{theme_settings.productpage_related_products_count}}
+    similar_by_views:
+        limit: {{theme_settings.productpage_similar_by_views_count}}
+---
+{{#partial "page"}}
+
+   
+
+    {{#each product.shipping_messages}}
+        {{> components/common/alert-info message}}
+    {{/each}}
+
+    <div itemscope itemtype="http://schema.org/Product">
+        {{> components/products/product-view schema=true}}
+
+		<script>
+
+		jQuery(document).ready(function(){
+		 if(jQuery('.modal-body.quickView .productView.productView--quickView').length <=0){   
+			function reinitSizePos(){
+			    // Commented out due to overflow conflict on slick slider
+				/* if(jQuery(window).width() > 991){
+							jQuery('.sticky-content').addClass('not-in-modal');
+							var _initHeight = jQuery('.sticky-content').height();
+							var _initWidth = jQuery('.sticky-content').width();
+							var _navOffSet = jQuery('.header_nav').height()+10;
+							_tmpHeight = jQuery(window).height() - _navOffSet ;
+							tmpWidth = 0;
+							
+							jQuery('.sticky-content').css({'top': _navOffSet- 5 });
+							if (_initHeight > _tmpHeight){
+								tmpWidth =  _initWidth * (_tmpHeight/_initHeight);
+								jQuery('.sticky-content').css({'width' : tmpWidth });	
+							}
+							if (_initWidth > jQuery('.item-floater').width()){
+								jQuery('.sticky-content').css({'width' : '' });	
+							}
+				}else{
+							jQuery('.sticky-content').css({'width' : '' });	
+				}	*/
+			}
+			reinitSizePos();
+			
+			function imageGalleryPos(){
+				if(jQuery(window).width() < 992){
+					jQuery('.productView-images').insertBefore( "#productInfo-Part2" );
+				}else{
+					if(jQuery('.productView-images').length >0 ){
+						jQuery('.productView-images').appendTo('.product-imageGallery-side');
+					}
+				}
+				reinitSizePos();		
+			}
+			imageGalleryPos();		
+					
+					
+			var reinitData = setInterval(function() {
+					   if (jQuery('.sticky-content').height() > 0 ) {
+							reinitSizePos();
+							clearInterval(reinitData);
+					   }
+			}, 100); 
+					
+
+					
+			jQuery( window ).resize(function() {
+				imageGalleryPos();
+				//reinitSizePos();
+			});
+				
+		 }else{
+			jQuery('.sticky-content').removeClass('not-in-modal');
+		 }
+		 
+		 
+		});
+
+
+		</script>
+
+        {{#if product.videos.list.length}}
+            {{> components/products/videos product.videos}}
+        {{/if}}
+
+    </div>
+	
+	<div class="productView-related-product">
+	{{#if product.related_products}}
+		<h4 class="related-product-heading BebasNeue">RECOMMENDED FOR THIS <strong>BOARD</strong></h4>
+		{{> components/products/related products=product.related_products rows=1 columns=4}}
+	{{/if}}
+	</div>
+
+{{/partial}}
+{{> layout/base}}

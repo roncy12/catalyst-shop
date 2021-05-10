@@ -1,0 +1,48 @@
+{{#partial "page"}}
+
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+<main class="page cms-page-css page-id-{{ page.id }}-css">
+    <h1 class="page-heading" style="display:none;">{{ page.title }}</h1>
+    {{#if page.sub_pages}}
+    <nav class="navBar navBar--sub" style="display:none;">
+        <ul class="navBar-section account-navigation">
+        {{#each page.sub_pages}}
+            <li class="navBar-item"><a class="navBar-action" href="{{url}}">{{title}}</a></li>
+        {{/each}}
+        </ul>
+    </nav>
+    {{/if}}
+
+    {{{page.content}}}
+
+	<script type="text/javascript">
+	    /*
+    			var path = (window.location.hostname == "localhost" ? "http://localhost/Shape3dWeb/" : "https://www.shape3d.com/");
+    			var script = document.createElement('script');
+    			script.type = 'text/javascript';
+    			script.src = path + "js/Shape3d.js?R=" + Date.now();
+    			jQuery("head").append(script);
+    			script = document.createElement('script');
+    			script.type = 'text/javascript';
+    			script.src = path + "js/BoardDesignerIntegration.js?R=" + Date.now();
+    			jQuery("head").append(script);
+    			var interval = setInterval(function () {
+    				if (typeof getParams == "function" && typeof Shape3dIntegration == "function") {
+    					clearInterval(interval);
+    					new Shape3dIntegration("Designer3DAPI.html", 104483, null, null, 106);
+    				}
+    			}, 50);
+    			*/
+    		</script>
+    	<!--	<div id="divPlaceHolder" style="position: relative;overflow: hidden">
+    			<iframe id="designerFrame" style="display: block;width: 100%;height: 700px;border-style: none" scrolling="no" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    		</div>
+		-->		
+
+</main>
+
+
+{{/partial}}
+
+{{> layout/base}}

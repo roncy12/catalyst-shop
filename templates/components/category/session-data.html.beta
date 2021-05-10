@@ -1,0 +1,79 @@
+	<script>
+		var _site_key = "ctl_";
+		var category_url = '{{ category.url }}';
+		console.log(category_url.indexOf("http"));
+		if(category_url.indexOf("http") < 0 ){
+			category_url = 'http://localhost:3000'+category_url;
+		}
+		console.log(category_url);	
+		
+		if (window.location.search.indexOf('ajaxLocalStorage=Yes') > -1) {
+            let refresh = category_url;  
+            window.history.pushState({ path: refresh }, '', refresh);
+                    //.log(window.location.href);
+                    //console.log(window.location.search);
+                    //console.log(newParam);
+        }
+	
+		if (sessionStorage.getItem(_site_key+'category_id') == null) {
+			/*if(localStorage.getItem(_site_key+'category_{{ category.id }}')	!== null) {		
+				localStorage.removeItem(_site_key+'category_{{ category.id }}');
+			}*/
+			window.location.href = category_url+'?limit=99999&ajaxLocalStorage=Yes';
+		}
+		
+		
+		
+	
+		sessionStorage.setItem(_site_key+'category_id', '{{ category.id }}');
+		localStorage.setItem(_site_key+'category_id', '{{ category.id }}');
+		sessionStorage.setItem(_site_key+'category_url', '{{ category.url }}');
+		localStorage.setItem(_site_key+'category_url', '{{ category.url }}');
+
+		//console.log(JSON.stringify('{{ pluck  category.products 'id'}}'));
+		//console.log(JSON.stringify('{{ pluck  category.products 'url'}}'));
+	
+		if (sessionStorage.getItem(_site_key+'category_id') !== null) {
+			//console.log(JSON.parse(sessionStorage.getItem(_site_key+'category_id')));
+		
+			var _tmpPID = ('{{ pluck  category.products 'id'}}').split(',');
+			//console.log(_tmpPID);
+			var _tmpPURL = ('{{ pluck  category.products 'url'}}').split(',');
+			//console.log(_tmpPURL);
+			var _categoryProducts = {};
+		
+			for (var i = 0; i < _tmpPID.length; i++)
+			
+			
+			_categoryProducts[_tmpPID[i]] = { 	'prev': { 'id' : _tmpPID[i-1], 'url' : _tmpPURL[i-1] },
+												'next': { 'id' : _tmpPID[i+1], 'url' : _tmpPURL[i+1] }	
+											};
+			console.log(_categoryProducts);								
+			if(localStorage.getItem(_site_key+'category_{{ category.id }}')	!== null) {							
+				var _productList = JSON.parse(localStorage.getItem(_site_key+'category_{{ category.id }}'));
+				
+				
+				const result = Object.values(
+				   [].concat(_productList, _categoryProducts)
+					 .reduce((r, c) => (r[c.type] = Object.assign((r[c.type] || {}), c), r), {})
+				);								
+				
+				console.log(result);
+				_categoryProducts = result;
+			}
+			console.log(_categoryProducts);
+			localStorage.setItem(_site_key+'category_{{ category.id }}',JSON.stringify(_categoryProducts));
+			
+			if (window.location.search.indexOf('ajaxLocalStorage=Yes') > -1) {
+				window.location.href = category_url;
+			}
+		}
+		
+		if(localStorage.getItem(_site_key+'category_id') !== null) {
+			//console.log(JSON.parse(localStorage.getItem(_site_key+'category_id')));
+		}
+		
+		//console.log(JSON.parse(localStorage.getItem(_site_key+'category_'+'{{ category.id }}')));
+		
+		console.log(window);
+	</script>

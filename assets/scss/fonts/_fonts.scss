@@ -1,0 +1,50 @@
+@import "clear-sans";
+
+$fonts: $fontFamily-sans $fontFamily-serif $fontFamily-mono $fontFamily-headings $fontFamily-hero;
+
+@if contains($fonts, "'Clear Sans', sans-serif") {
+    @include clear-sans;
+}
+
+@font-face {
+    font-family: 'BebasNeue-Regular';
+	src: url('../fonts/BebasNeue-Regular-webfont.eot');
+	src: url('../fonts/BebasNeue-Regular-webfont.eot?#iefix') format('eot'),
+	url('../fonts/BebasNeue-Regular-webfont.ttf') format('truetype');
+	font-weight: normal !important;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+    font-family: 'OpenSans-Regular';
+	src: url('../fonts/OpenSans-Regular-webfont.eot');
+	src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('eot'),
+	url('../fonts/OpenSans-Regular-webfont.svg') format('svg'),
+	url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;	
+	font-display: swap;
+}
+
+@font-face {
+    font-family: "OpenSans-SemiBold";
+    src: url('../fonts/OpenSans-SemiBold-webfont.eot');
+	src: url('../fonts/OpenSans-SemiBold-webfont.eot?#iefix') format('eot'),
+	url('../fonts/OpenSans-SemiBold-webfont.svg') format('svg'),
+	url('../fonts/OpenSans-SemiBold-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;	
+	font-display: swap;
+}
+
+@font-face {
+    font-family: "OpenSans-Bold";
+    src: url('../fonts/OpenSans-Bold-webfont.eot');
+	src: url('../fonts/OpenSans-Bold-webfont.eot?#iefix') format('eot'),
+	url('../fonts/OpenSans-Bold-webfont.svg') format('svg'),
+	url('../fonts/OpenSans-Bold-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;	
+	font-display: swap;
+}

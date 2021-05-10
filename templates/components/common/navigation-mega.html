@@ -1,0 +1,88 @@
+{{#if navigation-mega '==' 'megamenu'}}  
+{{#if id '==' ../mega_category_id}}
+     <ul class="navPage-subMenu-list col-md-{{lang 'mega-menu.block-mega-1.col-menu-sub' }} {{lang 'mega-menu.block-mega-1.on-off-menusub'}}">
+     Check mega
+        <li class="navPage-subMenu-item">
+            <a class="navPage-subMenu-action navPages-action" href="{{url}}">{{lang 'category.view_all.name' category=name}}</a>
+        </li>
+        {{#each children}}
+            <li class="navPage-subMenu-item">
+                {{#if children}}
+                    <a
+                        class="navPage-subMenu-action navPages-action has-subMenu"
+                        href="{{url}}"
+                        data-collapsible="navPages-{{id}}"
+                        data-collapsible-disabled-breakpoint="medium"
+                        data-collapsible-disabled-state="open"
+                        data-collapsible-enabled-state="closed">
+                        {{name}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down" /></svg></i>
+                    </a>
+                    <ul class="navPage-childList" id="navPages-{{id}}">
+                        {{#each children}}
+                        <li class="navPage-childList-item">
+                            <a class="navPage-childList-action navPages-action" href="{{url}}">{{name}}</a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                {{else}}
+                    <a class="navPage-subMenu-action navPages-action" href="{{url}}">{{name}}</a>
+                {{/if}}
+            </li>
+        {{/each}}
+    </ul>
+   
+        <div class="category-menu col-md-{{lang 'mega-menu.block-mega-1.col-menu-sub-category' }} {{lang 'mega-menu.block-mega-1.on-off-category' }}" >
+            <section>
+                <div class="" data-ap-category-url="{{url}}" >
+                </div>
+            </section>
+        </div>
+    
+        <div class="html-menu col-md-{{lang 'mega-menu.block-mega-1.col-menu-sub-html'}} {{lang 'mega-menu.block-mega-1.on-off-html' }}">
+            <div class="title-html-menu">{{lang 'mega-menu.block-mega-1.title-html-menu'}}</div>
+            <div class="content-html-menu">{{lang 'mega-menu.block-mega-1.content-html-menu'}}</div>
+            <div class="image-html-menu">
+                <img src="{{lang 'mega-menu.block-mega-1.image-html-menu'}}" alt="{{lang 'mega-menu.block-mega-1.alt-image' }}">
+            </div>
+        </div> 
+
+        <div class="video-menu col-md-{{lang 'mega-menu.block-mega-1.col-menu-sub-video'}} {{lang 'mega-menu.block-mega-1.on-off-video' }}">
+            <div class="title-video-menu">{{lang 'mega-menu.block-mega-1.title-video-menu'}}</div>
+            <div class="content-video-menu">
+            <iframe width="100%" height="250px" src="{{lang 'mega-menu.block-mega-1.content-video-menu'}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+    
+    {{else}}
+    <ul class="navPage-subMenu-list ">
+        <li class="navPage-subMenu-item">
+            <a class="navPage-subMenu-action navPages-action" href="{{url}}">{{lang 'category.view_all.name' category=name}}</a>
+        </li>
+        {{#each children}}
+            <li class="navPage-subMenu-item">
+                {{#if children}}
+                    <a
+                        class="navPage-subMenu-action navPages-action has-subMenu"
+                        href="{{url}}"
+                        data-collapsible="navPages-{{id}}"
+                        data-collapsible-disabled-breakpoint="medium"
+                        data-collapsible-disabled-state="open"
+                        data-collapsible-enabled-state="closed">
+                        {{name}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down" /></svg></i>
+                    </a>
+                    <ul class="navPage-childList" id="navPages-{{id}}">
+                        {{#each children}}
+                        <li class="navPage-childList-item">
+                            <a class="navPage-childList-action navPages-action" href="{{url}}">{{name}}</a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                {{else}}
+                    <a class="navPage-subMenu-action navPages-action" href="{{url}}">{{name}}</a>
+                {{/if}}
+            </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+{{/if}}    

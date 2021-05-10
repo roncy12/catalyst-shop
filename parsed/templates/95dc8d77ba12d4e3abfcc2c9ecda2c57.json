@@ -1,0 +1,3 @@
+{
+  "components/products/custom_board": "\r\n<a class=\"_custom-board\" href=\"/webstore/board-builders/?Client=104483&amp;Board={{ customboard_number }}\">\r\n\t<span class=\"fa fa-pencil-square-o\">\r\n\t\t<span class=\"customorder-text\">Custom Order \r\n\t\t\t{{# if board_model '!=' '' }}\r\n\t\t\t\t{{ board_model }} \r\n\t\t\t{{/if}}\r\n\t\t</span>\r\n\t</span>\r\n</a>\n"
+}

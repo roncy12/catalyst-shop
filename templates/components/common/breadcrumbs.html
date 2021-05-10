@@ -1,0 +1,23 @@
+<!--<span class="square"></span>-->
+<ul class="breadcrumbs {{#if template_file '===' 'pages/category'}} bread-category {{/if}}">
+    {{#each breadcrumbs}}
+        <li class="breadcrumb {{#if @last}}is-active{{/if}}">
+            {{#if url}}
+                <a href="{{url}}" class="breadcrumb-label">{{name}}</a>
+            {{else}}
+                <span class="breadcrumb-label">{{name}}</span>
+            {{/if}}
+        </li>
+    {{/each}}
+	
+	{{#or (if template_file '===' 'pages/page') (if template_file '===' 'pages/contact-us') }}
+		{{#contains (pluck breadcrumbs 'name') page.title }}
+		{{else}}
+			<li class="breadcrumb is-active ">
+				<span class="breadcrumb-label">{{ page.title}}</span>
+			</li>
+		{{/contains}}
+	{{/or}}	
+	
+</ul>
+<!--<span class="square"></span>-->

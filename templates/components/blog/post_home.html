@@ -1,0 +1,28 @@
+<article class="blog-index">
+    <div class="blog-recent_posts-figure">
+        {{#if recent_posts.thumbnail}}
+            <figure class="blog-thumbnail">
+                <a href="{{recent_posts.url}}">
+                    <img src="{{getImage recent_posts.thumbnail 'blog_size'}}" alt="{{recent_posts.thumbnail.alt}}">
+                </a>
+            </figure>
+        {{/if}}
+    </div>
+    <div class="blog-recent_posts-body">
+        <p class="blog-date">{{recent_posts.date_published}}</p>
+        <div class="blog-right">
+            <header class="blog-header">
+                <h2 class="blog-title">
+                    <a href="{{recent_posts.url}}">{{recent_posts.title}}</a>
+                </h2>
+            </header>
+            <div class="blog-recent_posts">
+                {{#if recent_posts.body}}
+                    {{{recent_posts.body}}}
+                {{else}}
+                    {{recent_posts.summary}}...
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</article>

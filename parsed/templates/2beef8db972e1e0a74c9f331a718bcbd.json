@@ -1,0 +1,3 @@
+{
+  "components/common/prevnext/prevnext_data": "\r\n{{#if prevnext_list }}\r\n\t\t\t<div id=\"ajaxLocalStorageResult\">\r\n\t\t\t\t<div id=\"ajaxLocalStorage_prevnext_id\">\r\n\t\t\t\t{{json (pluck prevnext_list prevnext_id) }}\r\n\t\t\t\t</div>\r\n\t\t\t\t<div id=\"ajaxLocalStorage_prevnext_url\">\r\n\t\t\t\t{{json (pluck prevnext_list prevnext_url) }}\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n{{/if}}\n"
+}

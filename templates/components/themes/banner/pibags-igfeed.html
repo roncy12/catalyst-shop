@@ -1,0 +1,85 @@
+<div class="grid grid--no-gutters image-bar clearfix">
+	<div class="section__title">
+        <h2 class="page-heading BebasNeue">
+            <i class="ct-img ct-icon-instagram-h"></i>{{lang 'ap-base-1.instagram-feed.title' }}
+        </h2>
+	</div>
+
+	<div id="ctl-instagram-feed"  ></div>
+
+	<script src="{{cdn 'assets/InstagramFeed-slick.min.js'}}"></script>
+
+	<script>
+		var slick_option = {
+        "dots": false,
+        "arrows": true,
+        "mobileFirst": true,
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+        "rows":1,
+		"autoplaySpeed": 7000,
+        "autoplay": true,
+		"infinite": true,
+        "responsive": [
+            {
+                "breakpoint": 1260,
+                "settings": {
+                    "slidesToScroll": 4,
+                    "slidesToShow": 4
+				
+                }
+				
+            },
+            {
+                "breakpoint": 992,
+                "settings": {
+                    "slidesToScroll": 3,
+                    "slidesToShow": 3
+                }
+            },
+			
+            {
+                "breakpoint": 550,
+                "settings": {
+                    "slidesToScroll": 2,
+                    "slidesToShow": 2
+                }
+            }
+        ]
+    };
+	
+	
+	var _igFlag = 0;
+	jQuery(window).on('scroll', function (e) {
+		if(_igFlag==0){
+			jQuery.instagramFeed({
+				'username': '{{lang 'ap-base-1.instagram-feed.username' }}',
+				'container': document.getElementById("ctl-instagram-feed"),
+				'slick_slider': true, //if slick_slider is true profile and biography are auto nulled
+				'display_profile': false,
+				'display_biography': false,
+				'display_gallery': true,
+				'display_igtv': true,
+				'callback': null,
+				'styling': false,
+				'items': {{lang 'ap-base-1.instagram-feed.items' }},
+				'items_per_row': 4,
+				'margin': 1 ,
+				'slick': '#ctl-instagram-feed > div',
+				'slick_option': slick_option
+			});
+			_igFlag = 1;
+		}
+	});
+		
+	
+	</script>	
+
+	
+	
+
+   
+	
+	
+	
+</div>

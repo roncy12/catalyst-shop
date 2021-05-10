@@ -1,0 +1,27 @@
+<script>
+
+   {{> components/common/text-mapping/shortcode-values }}
+	
+	var _facetName = ['CONSTRUCTION','LOCALE'];
+	var _shortcode;
+	
+	function facetReplacer(_facetName,e){
+		return function(_shortcode){
+			if (typeof _facetData[_facetName][_shortcode] !== 'undefined'){
+				jQuery(e).html(jQuery(e).html().replace(_shortcode,_facetData[_facetName][_shortcode]));
+			}
+		}
+	}
+
+	function facetAdapter(_facetName){
+		jQuery('#facetedSearch-navList--'+_facetName+' .navList-item a').each(function(i,e){
+			_shortcode = jQuery(e).text().split('(')[0].trim();
+			
+			(_facetName == "LOCALE") ? _shortcode = _shortcode.split(",") : _shortcode = [_shortcode];
+			_shortcode.map(facetReplacer(_facetName,e));
+			(_facetName == "LOCALE") ? jQuery(e).html(jQuery(e).html().replace(",",",<br>")):'';
+		});
+	}
+	var _facetInit = _facetName.map(facetAdapter);	
+	
+</script>

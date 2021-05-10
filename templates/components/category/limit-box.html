@@ -1,0 +1,27 @@
+<fieldset class="form-fieldset actionBar-section">
+    <div class="form-field">
+        <label class="form-label" for="limit" style="text-align: right;">Show:</label>
+        <select class="form-select form-select--small" name="limit" id="limit">
+            <option value="9">9 per page</option>
+            <option value="15">15 per page</option>
+            <option value="21">21 per page</option>
+            <option value="30">30 per page</option>
+            <option value="36">36 per page</option>
+        </select>
+    </div>
+</fieldset>
+
+<script>
+    // ------------------------------------------------------------------------
+    // Limit changer
+    // ------------------------------------------------------------------------
+	let searchParams = new URLSearchParams(window.location.search);	
+	jQuery('[data-limit-by] #limit').on('change', function(e){
+		searchParams.set('limit',jQuery(this).val());
+		window.location.search = searchParams;
+	});	
+	
+	if(searchParams.has('limit')){
+		jQuery('[data-limit-by] #limit').val(searchParams.get('limit'));
+	}
+</script>

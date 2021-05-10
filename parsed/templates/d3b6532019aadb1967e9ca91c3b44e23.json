@@ -1,0 +1,3 @@
+{
+  "components/common/social-media-links": "\t<ul class=\"navUser-section navUser-social\">\r\n\t\t<li class=\"navUser-item\">\r\n\t\t\t<a class=\"navUser-action\" target=\"_blank\" href=\"https://www.instagram.com/catalystshopdotcom/\"><i class=\"ct-img ct-icon-instagram\"></i></a>\r\n\t\t</li>\t\r\n\t\t<li class=\"navUser-item\">\r\n\t\t\t<a class=\"navUser-action\" target=\"_blank\" href=\"https://www.facebook.com/catalystshopdotcom/\"><i class=\"ct-img ct-icon-facebook\"></i></a>\r\n\t\t</li>\t\r\n\t\t<li class=\"navUser-item\">\r\n\t\t\t<a class=\"navUser-action\" target=\"_blank\" href=\"https://www.youtube.com/channel/UCXVxM8C5gZiB0cse36sAMDw\"><i class=\"ct-img ct-icon-youtube\"></i></a>\r\n\t\t</li>\r\n\t</ul>\n"
+}

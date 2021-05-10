@@ -1,0 +1,53 @@
+<div class="{{lang 'ap-base-2.slideshow.on-off-section' }} block-hero-2"> 
+    {{#block "hero"}} {{/block}}
+</div>
+<div class="container-width">
+    {{#if banners.top}}
+    <div class="banners clearfix" data-banner-location="top">
+        <div class="banner banner-top">
+            {{{limit banners.top 1}}}
+        </div>
+    </div>
+    {{/if}}
+    
+    <div class="{{lang 'ap-base-2.collection.on-off-section' }} big-section-index"> 
+        <div class="container">
+            {{> components/themes/sections/section section="collections-list-h2"}}
+        </div>
+    </div>
+    <div class="{{lang 'ap-base-2.products-tab.on-off-section' }} big-section-index tab-products">
+            <div class="container">
+        {{> components/themes/sections/section section="producttab"}}
+         </div>
+    </div> 
+    <div class="{{lang 'ap-base-2.banner-mid.on-off-section' }} big-section-index banner-ap2"> 
+            <div class="container">
+        {{> components/themes/sections/section section="pibags-mid2"}}
+                </div>
+    </div>
+    <div class="{{lang 'ap-base-2.categories-home.on-off-section' }} big-section-index big-section-index2 clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="page-width col-lg-9 col-md-9 col-sm-12">
+                {{> components/themes/sections/section section="categories_homepage"
+                category_id=(lang "ap-base-2.categories-home.category_id_1" )
+                heading=(lang "ap-base-2.categories-home.heading_1" )
+                }}
+                </div>
+                <div class="banner_product_list col-lg-3 col-md-3 hidden-sm hidden-xs hidden-sp pull-left">
+                    {{> components/themes/sections/section section="banner-product-h2"}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="{{lang 'ap-base-2.banner-overlay.on-off-section' }} big-section-index"> 
+            {{> components/themes/sections/section section="hero-overlay"}}
+        </div>
+    <div class="{{lang 'ap-base-2.blog-home.on-off-section' }} big-section-index big-section-index2">
+        <div class="container">
+            <div class="row">
+                {{> components/themes/sections/section section="blog_home" columns=3}}
+            </div>
+         </div>
+    </div>
+</div>

@@ -1,0 +1,3 @@
+{
+  "components/faceted-search/adapter/multi-slider": "<style> \r\n\t#facetedSearch-content--{{ facet }} {display:none;} \r\n\t.facetFilterData-{{dashcase facet}} { display:none !important;}\r\n</style>\r\n{{{stylesheet '/assets/jquery-ui.css'}}}\r\n<script src=\"{{cdn 'assets/jquery-ui.min.js'}}\"></script>\r\n<div class=\"faceted-data\" id=\"facetSliderData-{{dashcase facet}}\" data-ap-facetedsearch-data=\"{{ facet }}\" data-ap-facetremove-data=\"{{ remove_url }}\" ></div>\r\n\t\t\r\n\r\n\t\r\n"
+}

@@ -1,0 +1,64 @@
+<div class="{{lang 'ap-base-4.slideshow.on-off-section' }}">
+      {{#block "hero"}} {{/block}}
+</div>
+
+{{#if banners.top}}
+<div class="banners" data-banner-location="top">
+      <div class="banner banner-top">
+            {{{limit banners.top 1}}}
+      </div>
+</div>
+{{/if}}
+
+<div class="{{lang 'ap-base-4.collection.on-off-section' }}">
+      {{> components/themes/sections/section section="collections-list-h4"}}
+</div>
+
+<div class="{{lang 'ap-base-4.new-products.on-off-section' }} big-section-index clearfix">
+      <div class="container">
+            <div class="row">
+                  <div class="banner_product_list col-lg-3 col-md-3 hidden-sm hidden-xs hidden-sp pull-left">
+                        {{> components/themes/sections/section section="banner-product-h4"}}
+                  </div>
+                  <div class="page-width col-lg-9 col-md-9 col-sm-12">
+                        {{> components/themes/sections/section section="new_products"}}
+                  </div>
+            </div>
+      </div>
+</div>
+
+<div class="{{lang 'ap-base-4.banner-overlay.on-off-section' }} hero-overlay-h4">
+      {{> components/themes/sections/section section="banner-hero-h4"}}
+</div>
+
+<div class="{{lang 'ap-base-4.trendding-products.on-off-section' }} big-section-index big-section-index2 clearfix">
+      <div class="container">
+            <div class="row">
+                  <div class="banner_product_list col-lg-3 col-md-3 hidden-sm hidden-xs hidden-sp">
+                        {{> components/themes/sections/section section="banner-product-h4-2"}}
+                  </div>
+                  <div class="page-width col-lg-9 col-md-9 col-sm-12">
+                        {{> components/themes/sections/section section="categories_homepage" category_id=(lang "ap-base-4.trendding-products.category_id_1"
+                        ) heading=(lang "ap-base-4.trendding-products.heading_1" ) }}
+                  </div>
+            </div>
+      </div>
+</div>
+
+<div class="{{lang 'ap-base-4.blog-home.on-off-section' }} big-section-index">
+      <div class="container">
+            {{> components/themes/sections/section section="blog_home" columns=3}}
+      </div>
+</div>
+
+<div class="{{lang 'ap-base-4.instagram-carousel.on-off-section' }}">
+      {{> components/themes/sections/section section="instagram-carousel" columns=10}}
+</div>
+
+{{#if banners.bottom}}
+<div class="banner-bottom" data-banner-location="bottom">
+      <div class="banner banner-bottom">
+            {{{limit banners.bottom 1}}}
+      </div>
+</div>
+{{/if}}

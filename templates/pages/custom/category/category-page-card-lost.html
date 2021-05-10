@@ -1,0 +1,308 @@
+---
+category:
+    shop_by_price: true
+    products:
+        limit: {{theme_settings.categorypage_products_per_page}}
+---
+
+{{#contains settings.facebook_like_button.href 'ajaxLocalStorage' }}
+		{{#if category.products}}
+			<div id="ajaxLocalStorageResult">
+				<div id="ajaxLocalStorage_category_id">
+				{{json (pluck category.products 'id') }}
+				</div>
+				<div id="ajaxLocalStorage_category_url">
+				{{json (pluck category.products 'url') }}
+				</div>
+			</div>
+		{{/if}}
+{{else}}
+<!--<div id="PrevNext-Data-on">{{inject "prevnextParam" category.id}}</div> parameter condition-->
+
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{#partial "head"}}
+	
+    {{#if pagination.category.previous}}
+        <link rel="prev" href="{{pagination.category.previous}}">
+    {{/if}}
+    {{#if pagination.category.next}}
+        <link rel="next" href="{{pagination.category.next}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+	
+	{{> components/category/session-data }}
+	<div id="gr-dropzone-category_banner_top" class="category_banner b-top"></div>
+	
+	<div class="gr-dropzone" data-gr-zone="gr-dropzone-breadcrumbs"> 
+        <img class="img-breadcrumbs" src="https://cdn11.bigcommerce.com/s-pllu8dargz/product_images/uploaded_images/imagenocategory-breadcrumbs-bg.jpg?v=3" alt="" />
+    </div>
+
+	
+	{{{category.description}}}
+	{{{snippet 'categories'}}}
+	
+	<h1 class="page-heading">{{category.name}} Models</h1>
+	
+	<div class="category-card page">
+		<div class="category-card-container">
+			{{#if category.id '==' '166'  }}
+			
+				<h3 class="page-heading">New Release</h3>
+			    <div class="grid-list _left-align">
+				 {{#each category.subcategories }}
+			       
+                    {{#inArray (split (trim 'Artist Reunion Boards,Baby Buggy,Baby Buggy Round,Beach Buggy,Bean Bag,Cobra Killer,Crowd Killer,Driver,Driver 2.0,El Patron,Evil Twin,Limited: Sub Scorcher,Maysym,Mini Driver,Monk Fish,Pocket Rocket,Psycho Killer,Puddle Fish,Puddle Jumper,Puddle Jumper HP,Puddle Jumper Round Pin,Quiver Killer,Retro Gun,Round Nose Fish Redux,Round Nose Fish Retro,Round Up,Sabotaj,Short Round,Sub Driver,Taj Whiplash,Tube Pig,Uber Driver,V3 Rocket,V3 Stealth,Voodoo child') ",")  (trim name)  }}
+					<!-- do nothing -->
+					{{else}}
+                       	{{#if image.data }}
+	                    <div class="grid-item">
+							<a href="{{url}}" class="product_img_link">
+                                <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                                <h4 class="item-title">{{ name }}</h4>
+							</a>
+                    	</div>
+                       	{{/if}}	
+                    {{/inArray}}	
+	            {{/each}}
+			    </div>	
+						
+			    <!-- NEW RELEASE: Sub Driver 2.0,Hydra,Party Crasher,Sword-fish,Rocket Redux,MR X Mayhem California Twin,Smooth Operator,Rad Ripper,Retro Ripper -->
+			
+			     <h3 class="page-heading">Pro Performance</h3>
+			     <div class="grid-list _left-align">
+			     {{#each (split (trim 'Driver 2.0,Sub Driver,Pocket Rocket,Uber Driver,Sabotaj,El Patron') ",") }}    
+                    {{#inArray (pluck ../category.subcategories 'name')  (trim this)  }}
+                        {{#filter ../../category.subcategories  (trim ../this)  property='name' }}
+                        {{#if image.data }}
+    	                    <div class="grid-item">
+    							<a href="{{url}}" class="product_img_link">
+                                    <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                                    <h4 class="item-title">{{ name }}</h4>
+    							</a>
+                        	</div>
+                    	{{/if}}	
+                        {{/filter}} 
+                    {{/inArray}}	
+	            {{/each}}
+			    </div>	
+			    
+			    
+			    <h3 class="page-heading">SOMETHING FISHY</h3>
+			     <div class="grid-list _left-align">
+			     {{#each (split (trim 'Hydra,MR X Mayhem California Twin,Round Nose Fish Redux,Puddle Fish,Round Nose Fish Retro') ",") }}    
+                    {{#inArray (pluck ../category.subcategories 'name')  (trim this)  }}
+                        {{#filter ../../category.subcategories  (trim ../this)  property='name' }}
+                        {{#if image.data }}
+    	                    <div class="grid-item">
+    							<a href="{{url}}" class="product_img_link">
+                                    <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                                    <h4 class="item-title">{{ name }}</h4>
+    							</a>
+                        	</div>
+                    	{{/if}}	
+                        {{/filter}} 
+                    {{/inArray}}	
+	            {{/each}}
+			    </div>	
+			    
+			    
+			     <h3 class="page-heading">SPECIALTY</h3>
+			     <div class="grid-list _left-align">
+			     {{#each (split (trim 'Rocket Redux,Bean Bag,Cobra Killer,Evil Twin,Maysym') ",") }}    
+                    {{#inArray (pluck ../category.subcategories 'name')  (trim this)  }}
+                        {{#filter ../../category.subcategories  (trim ../this)  property='name' }}
+                        {{#if image.data }}
+    	                    <div class="grid-item">
+    							<a href="{{url}}" class="product_img_link">
+                                    <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                                    <h4 class="item-title">{{ name }}</h4>
+    							</a>
+                        	</div>
+                    	{{/if}}	
+                        {{/filter}} 
+                    {{/inArray}}	
+	            {{/each}}
+			    </div>	
+			    
+			    
+			     <h3 class="page-heading">MID-LENGTH MAYHEM</h3>
+			     <div class="grid-list _left-align">
+			     {{#each (split (trim 'Party Crasher,Smooth Operator,Crowd Killer') ",") }}    
+                    {{#inArray (pluck ../category.subcategories 'name')  (trim this)  }}
+                        {{#filter ../../category.subcategories  (trim ../this)  property='name' }}
+                        {{#if image.data }}
+    	                    <div class="grid-item">
+    							<a href="{{url}}" class="product_img_link">
+                                    <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                                    <h4 class="item-title">{{ name }}</h4>
+    							</a>
+                        	</div>
+                    	{{/if}}	
+                        {{/filter}} 
+                    {{/inArray}}	
+	            {{/each}}
+			    </div>	
+			    
+			    
+			    
+			     <h3 class="page-heading">STEP-UPS</h3>
+			     <div class="grid-list _left-align">
+			     {{#each (split (trim 'Sabotaj,Retro Ripper,Retro Gun,Round Up,Tube Pig') ",") }}    
+                    {{#inArray (pluck ../category.subcategories 'name')  (trim this)  }}
+                        {{#filter ../../category.subcategories  (trim ../this)  property='name' }}
+                        {{#if image.data }}
+    	                    <div class="grid-item">
+    							<a href="{{url}}" class="product_img_link">
+                                    <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                                    <h4 class="item-title">{{ name }}</h4>
+    							</a>
+                        	</div>
+                    	{{/if}}	
+                        {{/filter}} 
+                    {{/inArray}}	
+	            {{/each}}
+			    </div>	
+			    
+			    
+			     <h3 class="page-heading">RETRO SERIES</h3>
+			     <div class="grid-list _left-align">
+			     {{#each (split (trim 'Rad Ripper,Retro Ripper,Retro Gun,Round Nose Fish Retro') ",") }}    
+                    {{#inArray (pluck ../category.subcategories 'name')  (trim this)  }}
+                        {{#filter ../../category.subcategories  (trim ../this)  property='name' }}
+                        {{#if image.data }}
+    	                    <div class="grid-item">
+    							<a href="{{url}}" class="product_img_link">
+                                    <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                                    <h4 class="item-title">{{ name }}</h4>
+    							</a>
+                        	</div>
+                    	{{/if}}	
+                        {{/filter}} 
+                    {{/inArray}}	
+	            {{/each}}
+			    </div>				    
+			    
+			    
+			    <h3 class="page-heading">PUDDLE JUMPERS</h3>
+			     <div class="grid-list _left-align">
+			     {{#each (split (trim 'Puddle Jumper HP,Puddle Jumper Round Pin,Puddle Jumper,Puddle Fish') ",") }}    
+                    {{#inArray (pluck ../category.subcategories 'name')  (trim this)  }}
+                        {{#filter ../../category.subcategories  (trim ../this)  property='name' }}
+                        {{#if image.data }}
+    	                    <div class="grid-item">
+    							<a href="{{url}}" class="product_img_link">
+                                    <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                                    <h4 class="item-title">{{ name }}</h4>
+    							</a>
+                        	</div>
+                    	{{/if}}	
+                        {{/filter}} 
+                    {{/inArray}}	
+	            {{/each}}
+			    </div>	
+			    
+			    
+			     <h3 class="page-heading">KILLERS</h3>
+			     <div class="grid-list _left-align">
+			     {{#each (split (trim 'Crowd Killer,Psycho Killer,Quiver Killer') ",") }}    
+                    {{#inArray (pluck ../category.subcategories 'name')  (trim this)  }}
+                        {{#filter ../../category.subcategories  (trim ../this)  property='name' }}
+                        {{#if image.data }}
+    	                    <div class="grid-item">
+    							<a href="{{url}}" class="product_img_link">
+                                    <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                                    <h4 class="item-title">{{ name }}</h4>
+    							</a>
+                        	</div>
+                    	{{/if}}	
+                        {{/filter}} 
+                    {{/inArray}}	
+	            {{/each}}
+			    </div>	
+			    
+			
+			     <h3 class="page-heading">TAJ BURROW COLLECTION</h3>
+			     <div class="grid-list _left-align">
+			     {{#each (split (trim 'Sabotaj,Tube Pig,Baby Buggy,Beach Buggy,Taj Whiplash,Baby Buggy Round') ",") }}    
+                    {{#inArray (pluck ../category.subcategories 'name')  (trim this)  }}
+                        {{#filter ../../category.subcategories  (trim ../this)  property='name' }}
+                        {{#if image.data }}
+    	                    <div class="grid-item">
+    							<a href="{{url}}" class="product_img_link">
+                                    <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                                    <h4 class="item-title">{{ name }}</h4>
+    							</a>
+                        	</div>
+                    	{{/if}}	
+                        {{/filter}} 
+                    {{/inArray}}	
+	            {{/each}}
+			    </div>			
+			
+			
+			     <h3 class="page-heading">OG SURFBOARDS</h3>
+			     <div class="grid-list _left-align">
+			     {{#each (split (trim 'Short Round,V3 Rocket,V3 Stealth,Limited: Sub Scorcher,Monk Fish') ",") }}    
+                    {{#inArray (pluck ../category.subcategories 'name')  (trim this)  }}
+                        {{#filter ../../category.subcategories  (trim ../this)  property='name' }}
+                        {{#if image.data }}
+    	                    <div class="grid-item">
+    							<a href="{{url}}" class="product_img_link">
+                                    <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                                    <h4 class="item-title">{{ name }}</h4>
+    							</a>
+                        	</div>
+                    	{{/if}}	
+                        {{/filter}} 
+                    {{/inArray}}	
+	            {{/each}}
+			    </div>		
+			    
+			    
+			     <h3 class="page-heading">OTHER SURFBOARDS</h3>
+			     <div class="grid-list _left-align">
+			     {{#each (split (trim 'Artist Reunion Boards,Mini Driver,Voodoo child,Driver') ",") }}    
+                    {{#inArray (pluck ../category.subcategories 'name')  (trim this)  }}
+                        {{#filter ../../category.subcategories  (trim ../this)  property='name' }}
+                        {{#if image.data }}
+    	                    <div class="grid-item">
+    							<a href="{{url}}" class="product_img_link">
+                                    <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                                    <h4 class="item-title">{{ name }}</h4>
+    							</a>
+                        	</div>
+                    	{{/if}}	
+                        {{/filter}} 
+                    {{/inArray}}	
+	            {{/each}}
+			    </div>	
+			    
+			
+			{{else}}
+			    <div class="grid-list">
+			    {{#each category.subcategories}}
+                        {{#if image.data }}
+    	                    <div class="grid-item">
+    							<a href="{{url}}" class="product_img_link">
+                                    <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                                    <h4 class="item-title">{{ name }}</h4>
+    							</a>
+                        	</div>
+                    	{{/if}}	
+	            {{/each}}
+			    </div>	
+			
+			{{/if}}
+		</div>
+	</div>
+	
+	<div id="gr-dropzone-category_banner_bottom" class="category_banner b-bottom"></div>
+
+
+
+{{/partial}}
+{{> layout/base}}
+
+{{/contains}}

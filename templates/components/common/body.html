@@ -1,0 +1,48 @@
+<div class="body {{#replace '/' template_file }}-css-{{/replace}} {{#if template_file '===''pages/home' }}nomr-bt{{/if}} {{#if theme_settings.floatheader}}stop-float-body{{/if}}">
+    <div class="_gpagespeed _gLCP">
+    <div class="apframe-main _gpagespeed _gCLS">
+  	{{#if template_file '!=''pages/home' }} 
+		{{#if template_file '===' 'pages/cart'}}
+			<div class="container-fluid">
+				<div id="gr-dropzone-breadcrumbs" class="bg-breadcrumbs hide-onload" >
+				<img class="img-breadcrumbs" src="{{lang 'breadcrumbs-bg.imgNoCart'}}">
+				</div>
+				{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+			</div>
+		{{else}}
+			{{#if template_file '===' 'pages/category'}}
+			<div class="container-fluid">
+				<div id="gr-dropzone-breadcrumbs" class="bg-breadcrumbs hide-onload" >
+				<img class="img-breadcrumbs" src="{{lang 'breadcrumbs-bg.imgNoCategory'}}">
+				</div>
+				{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+			</div>
+			{{else}}
+				{{#or (if template_file '===' 'pages/blog') (if template_file '===' 'pages/blog-post') }}
+				<div class="container-fluid">
+					<div id="gr-dropzone-breadcrumbs" class="bg-breadcrumbs hide-onload" >
+					<img class="img-breadcrumbs" src="{{lang 'breadcrumbs-bg.imgNoBlog'}}">
+					</div>
+					{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+				</div>
+				{{else}}
+				<div class="container-fluid">
+					<div id="gr-dropzone-breadcrumbs" class="bg-breadcrumbs hide-onload" >
+					<img class="img-breadcrumbs" src="{{lang 'breadcrumbs-bg.imgNoCategory'}}">
+					</div>
+					{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}		
+				</div>	
+				{{/or}}
+			{{/if}}
+		{{/if}}  
+	
+	    <div class="container">
+	    	 {{#block "page"}} {{/block}}
+	    </div>
+	{{else}}
+	     {{#block "page"}} {{/block}}
+  	{{/if}}
+    </div>
+    </div>
+    {{> components/common/modal}}
+</div>

@@ -1,0 +1,3 @@
+{
+  "components/themes/banner/banner-product-h4-2": "<div class=\"block_img effect_image\">\r\n\t<a href=\"{{lang 'ap-base-4.trendding-products.link-banner'}}\">\r\n\t  <img src=\"{{lang 'ap-base-4.trendding-products.image-banner-product-left'}}\" alt=\"banner\" class=\"responsive\">\r\n\t</a>\r\n</div>\n"
+}

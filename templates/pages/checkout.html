@@ -1,0 +1,53 @@
+{{#partial "head"}}
+
+{{{ checkout.checkout_head }}}
+{{{ stylesheet '/assets/css/optimized-checkout.css' }}}
+{{{ stylesheet '/assets/css/store-checkout.css' }}}
+{{ getFontsCollection }}
+
+<script type="text/javascript">
+    window.language = {{{langJson 'optimized_checkout'}}};
+</script>
+
+{{/partial}}
+
+{{#partial "page"}}
+<header class="checkoutHeader optimizedCheckout-header">
+    <div class="checkoutHeader-content">
+        <h1 class="is-srOnly">{{lang 'checkout.title'}}</h1>
+        <h2 class="checkoutHeader-heading">
+            <a class="checkoutHeader-link" href="{{urls.home}}">
+                {{#if checkout.header_image}}
+                    <img alt="{{settings.store_logo.title}}" class="checkoutHeader-logo" id="logoImage" src="{{ checkout.header_image }}"/>
+                {{ else }}
+                    <span class="header-logo-text">{{settings.store_logo.title}}</span>
+                {{/if}}
+            </a>
+        </h2>
+    </div>
+</header>
+
+{{{ checkout.checkout_content }}}
+
+<script type="text/javascript">
+var OptiMonkOnReady = function () {
+    var adapter = OptiMonk.Visitor.createAdapter();
+    adapter.Cart.clear();
+    adapter.Cart.add('CartTotal', { 'quantity':'1', 'price':'{{ cart.sub_total.value }}' });
+    console.log(adapter.Cart);
+}
+</script>
+<div class="checkout footer-copyright">
+    {{#if theme_settings.show_powered_by}}
+                <span class="powered-by">Powered by <a href="https://www.bigcommerce.com/" rel="nofollow">BigCommerce</a></span>
+                {{/if}}
+                {{#if theme_settings.show_copyright_footer}}
+                <span class="powered-by">&copy; {{moment format="YYYY"}} {{settings.store_name}}. All Rights Reserved.</span>
+    {{/if}}  
+</div>
+<script src="{{cdn 'assets/jquery-3.5.1.min.js'}}"></script>
+{{> components/common/sn-remover }}
+	
+{{/partial}}
+
+{{> layout/empty}}

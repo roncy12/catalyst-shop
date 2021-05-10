@@ -1,0 +1,44 @@
+---
+products:
+    new:
+        limit: {{theme_settings.homepage_new_products_count}}
+    featured:
+        limit: {{theme_settings.homepage_featured_products_count}}
+    top_sellers:
+        limit: {{theme_settings.homepage_top_products_count}}
+category:
+    products:
+        limit: 4
+carousel: {{theme_settings.homepage_show_carousel}}
+blog:
+    recent_posts:
+        limit: {{theme_settings.homepage_blog_posts_count}}
+        summary: 230
+---
+{{#partial "hero"}}
+    {{#if carousel}}
+        {{> components/carousel}}
+    {{/if}}
+    {{{snippet 'home_content'}}}
+{{/partial}}
+
+{{#partial "page"}}
+    {{#each shipping_messages}}
+        {{> components/common/alert-info message}}
+    {{/each}}
+<div class="main full">
+    {{#if theme_settings.theme_variation '==' 'ap-base-4'}}
+        {{> components/themes/home/ap-base-4}}
+    {{else if theme_settings.theme_variation '==' 'ap-base-3'}}
+        {{> components/themes/home/ap-base-3}} 
+    {{else if theme_settings.theme_variation '==' 'ap-base-2'}}
+        {{> components/themes/home/ap-base-2}}
+    {{else}}
+        {{> components/themes/home/ap-base-1}}
+    {{/if}}
+
+</div>
+ 
+ 
+{{/partial}}
+{{> layout/base}}

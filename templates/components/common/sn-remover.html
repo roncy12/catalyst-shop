@@ -1,0 +1,42 @@
+	<script>
+	    // Serial Remover
+		function serialNRemover(){
+			var _ClassIds = ['title', '.card-title a', '.productView-title' , '.breadcrumb-label', '.previewCartItem-name a', '.cart-item-name a', '.alertBox-message span', '.product-title', '.el-item-name'];
+			var _i;
+			for (_i = 0; _i < _ClassIds.length; ++_i) {
+				jQuery(_ClassIds[_i]).each(function(){
+					// jQuery(this).html(jQuery(this).html().replace(/  *\[(.*?)\] */g, ""));  // Bracket
+					jQuery(this).html(jQuery(this).html().replace(/ *\([^)]*\) */g, ""));  // Parenthesis
+					jQuery(this).addClass(' _serial-hide ');
+				});
+			}
+			
+		}
+		serialNRemover();
+		if(jQuery('#checkout-app').length > 0 ){
+			var dynamicObserver = setInterval(function() {
+				if (jQuery('.cart-section .productList').length > 0 ) {
+					serialNRemover();
+					clearInterval(dynamicObserver);
+					//console.log('checkout # Removed');
+				}
+			}, 100); 
+			
+		}
+		else{
+			serialNRemover();
+			//console.log('Serial base Removed');
+		}
+		
+		// Navigation Menu Fix
+		jQuery('.navPage-custom-subMenu-action').on('mouseenter', function(e) {
+			_currentActiveSub = jQuery(this).attr('data-board-data');
+			if(	jQuery('.'+_currentActiveSub + ' .sn-products').length > 0){
+				serialNRemover();
+				jQuery('.'+_currentActiveSub + ' .custom-content-slides').removeClass("sn-products");
+			}	
+		});
+			
+		
+		
+	</script>        

@@ -1,0 +1,72 @@
+---
+category:
+    shop_by_price: true
+    products:
+        limit: {{theme_settings.categorypage_products_per_page}}
+---
+
+{{#contains settings.facebook_like_button.href 'ajaxLocalStorage' }}
+		{{#if category.products}}
+			<div id="ajaxLocalStorageResult">
+				<div id="ajaxLocalStorage_category_id">
+				{{json (pluck category.products 'id') }}
+				</div>
+				<div id="ajaxLocalStorage_category_url">
+				{{json (pluck category.products 'url') }}
+				</div>
+			</div>
+		{{/if}}
+{{else}}
+<!--<div id="PrevNext-Data-on">{{inject "prevnextParam" category.id}}</div> parameter condition-->
+
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{#partial "head"}}
+	
+    {{#if pagination.category.previous}}
+        <link rel="prev" href="{{pagination.category.previous}}">
+    {{/if}}
+    {{#if pagination.category.next}}
+        <link rel="next" href="{{pagination.category.next}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+	
+	{{> components/category/session-data }}
+	
+	<div id="gr-dropzone-category_banner_top" class="category_banner b-top"></div>
+	
+	<div class="gr-dropzone" data-gr-zone="gr-dropzone-breadcrumbs"> 
+        <img class="img-breadcrumbs" src="https://cdn11.bigcommerce.com/s-pllu8dargz/product_images/uploaded_images/imagenocategory-breadcrumbs-bg.jpg?v=3" alt="" />
+    </div>
+
+	{{{category.description}}}
+	{{{snippet 'categories'}}}
+	<h1 class="page-heading">{{category.name}}</h1>
+	<div class="page">
+		<aside class="page-sidebar" id="faceted-search-container">
+			{{> components/category/sidebar}}
+		</aside>
+
+		<main class="page-content" id="product-listing-container">
+			<div id="gr-dropzone-category_content_top" class="category_content b-top"></div>
+			
+			{{#if category.products}}
+				{{> components/category/product-listing}}
+			{{else}}
+				<p>{{lang 'categories.no_products'}}</p>
+			{{/if}}
+			
+			<div id="gr-dropzone-category_content_bottom" class="category_content b-bottom"></div>
+			
+		</main>
+	</div>
+	
+	<div id="gr-dropzone-category_banner_bottom" class="category_banner b-bottom"></div>
+
+
+
+{{/partial}}
+{{> layout/base}}
+
+{{/contains}}

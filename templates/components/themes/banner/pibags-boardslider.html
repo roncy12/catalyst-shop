@@ -1,0 +1,73 @@
+<div class="bannerhp bannermiddle clearfix" data-banner-location="middle">
+
+
+
+<section class="boardCarousel">
+ 
+   {{#each categories}}
+	    {{#if name '==' 'Surfboards'}}
+	         {{#if children }}
+	            {{#each children }}
+	                {{#if image.data }}
+	                    <div class="board-slide">
+                            <div class="box-banner">
+                                <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                                <div class="content-box">
+                                    <h4 class="bannermiddle-title">{{ name }}</h4>
+                                    <a href="{{ url }}" class="btn-bannermiddle">Shop Now</a>
+                                </div>
+                            </div>
+                    	</div>
+	                {{/if}}
+	            {{/each}}
+	        {{/if}}
+	    {{/if}}
+    {{/each}}
+
+</section>
+<script>
+
+var slick_option={
+        "dots": false,
+        "arrows": true,
+        "mobileFirst": true,
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+        "rows":1,
+		"autoplaySpeed": 10000,
+        "autoplay": true,
+		"infinite": false,
+        "responsive": [
+            {
+                "breakpoint": 1260,
+                "settings": {
+                    "slidesToScroll": 4,
+                    "slidesToShow": 4
+				
+                }
+				
+            },
+            {
+                "breakpoint": 992,
+                "settings": {
+                    "slidesToScroll": 3,
+                    "slidesToShow": 3
+                }
+            },
+            {
+                "breakpoint": 550,
+                "settings": {
+                    "slidesToScroll": 2,
+                    "slidesToShow": 2
+                }
+            }
+        ]
+    };
+
+	jQuery('.boardCarousel').not('.slick-initialized').slick(slick_option); 
+
+</script>
+
+
+</div>
+    

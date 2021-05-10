@@ -1,0 +1,52 @@
+     <div class="section__title ">
+            {{#if theme_settings.theme_variation '==' 'ap-base-1'}}
+            <h2 class="page-heading">{{lang 'products.top' }}</h2>
+            {{else if theme_settings.theme_variation '==' 'ap-base-2'}}
+            <h2 class="page-heading">{{lang 'ap-base-2.products-tab.title' }}</h2>
+            {{else if theme_settings.theme_variation '==' 'ap-base-3'}}
+            <h2 class="page-heading">{{lang 'ap-base-3.products-bestseller.top' }}</h2>
+            <span class="des_productlist">The best facility-related products and services on the market.</span>
+            {{else}}
+            <h2 class="page-heading">{{lang 'products.top' }}</h2>
+            {{/if}}
+         </div>
+<ul class="productGrid productGrid--maxCol{{ columns }}" data-product-type="top_sellers" data-product-type="top"
+  data-slick='{
+    "dots": false,
+    "autoplay": true,
+    "arrows": false,
+    "infinite": false,
+    "mobileFirst": true,
+    "slidesToShow": 1,
+    "slidesToScroll": 1,
+    "responsive": [
+        {
+            "breakpoint": 1260,
+            "settings": {
+                "slidesToScroll": 3,
+                "slidesToShow": {{ columns }}
+            }
+        },
+        {
+            "breakpoint": 800,
+            "settings": {
+                "slidesToScroll": 3,
+                "slidesToShow": 3
+            }
+        },
+        {
+            "breakpoint": 550,
+            "settings": {
+                "slidesToScroll": 2,
+                "slidesToShow": 2
+            }
+        }
+    ]
+}'>
+    {{#each products}}
+        <li class="product">
+            {{>components/products/card theme_settings=../theme_settings customer=../customer show_rating=../settings.show_product_rating show_compare=../settings setting_show = ../settings}}
+        </li>
+    {{/each}}
+</ul>
+

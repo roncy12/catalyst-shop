@@ -1,0 +1,11 @@
+
+{{#if prevnext_list }}
+			<div id="ajaxLocalStorageResult">
+				<div id="ajaxLocalStorage_prevnext_id">
+				{{json (pluck prevnext_list prevnext_id) }}
+				</div>
+				<div id="ajaxLocalStorage_prevnext_url">
+				{{json (pluck prevnext_list prevnext_url) }}
+				</div>
+			</div>
+{{/if}}

@@ -1,0 +1,70 @@
+<div class="{{lang 'ap-base-3.slideshow.on-off-section' }}"> 
+    {{#block "hero"}} {{/block}}
+ </div>
+ {{#if banners.top}}
+ <div class="banners" data-banner-location="top">
+    <div class="banner banner-top">
+       {{{limit banners.top 1}}}
+    </div>
+ </div>
+ {{/if}}
+ <div class="{{lang 'ap-base-3.collection.on-off-section' }}"> 
+    {{> components/themes/sections/section section="collections-list-h3"}}
+ </div>
+ <div class="{{lang 'ap-base-3.products-featured.on-off-section' }} big-section-index3 product-index3 clearfix">
+       <div class="banner_product_list no-padding col-lg-3 col-md-3 hidden-sm hidden-xs hidden-sp">
+          {{> components/themes/sections/section section="banner-product-h3"}}
+       </div>
+       <div class="page-width col-lg-9 col-md-9 col-sm-12 no-padding">
+          {{> components/themes/sections/section section="featured_products_h3"}}
+       </div>
+ </div>
+ <div class="{{lang 'ap-base-3.service-wrap.on-off-section' }}">
+    {{> components/themes/sections/section section="service_wrap"}}
+ </div>
+ <div class="{{lang 'ap-base-3.products-new.on-off-section' }} big-section-index big-section-index3 product-index3 clearfix">
+    <div class="row_">
+       <div class="banner_product_list col-lg-3 col-md-3 hidden-sm hidden-xs hidden-sp no-padding">
+          {{> components/themes/sections/section section="banner-product2-h3"}}
+       </div>
+       <div class="page-width col-lg-9 col-md-9 col-sm-12 no-padding">
+          {{> components/themes/sections/section section="new_products"}}
+       </div>
+    </div>
+ </div>
+ <div class="{{lang 'ap-base-3.brandlist-banner.on-off-section' }} big-section-service ">
+    <div class="flex_box clearfix">
+       <div class="block_logo col-md-6 col-sm-6 col-xs-12">
+          {{> components/themes/sections/section section="brand_list"}}
+       </div>
+       <div class="block_banner col-md-6 col-sm-6 col-xs-12">
+          {{> components/themes/sections/section section="banner-h3"}}
+       </div>
+    </div>
+ </div>
+ <div class="{{lang 'ap-base-3.products-bestseller.on-off-section' }} big-section-index3 product-index3 clearfix">
+    <div class="row_">
+       <div class="banner_product_list col-lg-3 col-md-3 hidden-sm hidden-xs hidden-sp no-padding">
+          {{> components/themes/sections/section section="banner-product3-h3"}}
+       </div>
+       <div class="page-width col-lg-9 col-md-9 col-sm-12 no-padding">
+          {{> components/themes/sections/section section="popular_products"}}
+       </div>
+    </div>
+ </div>
+ <div class="{{lang 'ap-base-3.banner-top.on-off-section' }} hero-overlay-h3"> 
+    {{> components/themes/sections/section section="hero-overlay-h3"}}
+ </div>
+ <div class="{{lang 'ap-base-3.blog-home.on-off-section' }} big-section-index">
+    {{> components/themes/sections/section section="blog_home" columns=4}}
+ </div>
+ <div class="{{lang 'ap-base-3.instagram-carousel.on-off-section' }}">
+    {{> components/themes/sections/section section="instagram-carousel" columns=12}}
+ </div>
+ {{#if banners.bottom}}
+ <div class="banner-bottom" data-banner-location="bottom">
+    <div class="banner banner-bottom">
+       {{{limit banners.bottom 1}}}
+    </div>
+ </div>
+ {{/if}}

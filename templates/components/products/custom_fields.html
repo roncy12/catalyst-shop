@@ -1,0 +1,119 @@
+{{#if page_template '==' 'product' }}
+{{#each custom_fields}}
+
+						{{# if name '==' 'CONSTRUCTION' }}	
+							<div class="productView-info-item">
+								<dt class="productView-info-name _cf_0">Brand</dt>
+								<dd class="productView-info-value _cf--{{ name}}">{{{value}}}</dd> 
+							 </div>
+						 
+						{{/if }}
+						{{# if name '==' 'MODEL' }}	
+							<div class="productView-info-item _cf_1">
+								<dt class="productView-info-name">Model</dt>
+								<dd class="productView-info-value _cf--{{ name}}">{{{value}}}</dd> 
+							 </div>
+						 
+						{{/if }}
+						{{# if name '==' 'LENGTH' }}	
+							<div class="productView-info-item _cf_2">
+								<dt class="productView-info-name">Length</dt>
+								<dd class="productView-info-value">{{{value}}}</dd> 
+							 </div>
+						 
+						{{/if }}
+						{{# if name '==' 'Width/Thickness' }}	
+							<div class="productView-info-item _cf_3">
+								<dt class="productView-info-name">Dimensions</dt>
+								<dd class="productView-info-value">{{{value}}}</dd> 
+							 </div>
+						 
+						{{/if }}
+						{{# if name '==' 'LITERS' }}	
+							<div class="productView-info-item _cf_4">
+								<dt class="productView-info-name">Volume</dt>
+								<dd class="productView-info-value">{{{value}}}</dd> 
+							 </div>
+						 
+						{{/if }}
+						{{# if name '==' 'FINS' }}	
+							<div class="productView-info-item _cf_5">
+								<dt class="productView-info-name">Fins</dt>
+								<dd class="productView-info-value">{{{value}}}</dd> 
+							 </div>
+						 
+						{{/if }}
+						{{# if name '==' 'SERIAL' }}	
+							<div class="productView-info-item _cf_6">
+								<dt class="productView-info-name">Serial Number</dt>
+								<dd class="productView-info-value">{{{value}}}</dd> 
+							 </div>
+						{{/if }}
+							 
+{{/each}}
+{{/if}}
+
+{{#if page_template '==' 'compare' }}
+	
+{{#each (split (trim custom_label) ",") }}
+	<tr class="compareTable-row">
+        <th class="compareTable-heading">
+            <span class="compareTable-headingText ">{{this}}</span>
+        </th>
+		
+		{{#if @last}}
+		
+			{{#each ../../comparisons}}
+				
+			<td class="compareTable-item tbl-fill _cf--{{ trim ../../this }}">
+				{{#if custom_fields}}
+                <ul>
+                    {{#each custom_fields}}
+						{{#inArray (split (trim ../../../../../custom_label) ",") (trim name) }}
+						{{else}}
+							{{#if name '!=' 'Customboard Number'}}
+							<li>{{name}}: {{{value}}}</li>
+							{{/if}}
+						{{/inArray}}			
+                    {{/each}}
+                 </ul>
+                {{else}}
+                    {{lang 'common.not_applicable'}}
+                {{/if}}
+
+			</td>				
+				
+			   
+			{{/each}}	
+		
+		
+		{{else}}
+		
+		
+			{{#each ../../comparisons}}
+				
+			<td class="compareTable-item tbl-fill _cf--{{ trim ../../this }}">
+
+				{{#if custom_fields}}
+						{{#filter custom_fields  (trim ../../this)  property='name' }}
+							{{{value}}}
+						{{else}}
+							{{lang 'common.not_applicable'}}
+						{{/filter}} 
+				{{else}}
+					{{lang 'common.not_applicable'}}
+				{{/if}}
+					
+			</td>				
+				
+			   
+			{{/each}}
+		
+		{{/if}}
+		
+    </tr>
+
+{{/each}}
+{{/if}}
+					
+					

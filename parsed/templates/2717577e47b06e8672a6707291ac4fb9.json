@@ -1,0 +1,3 @@
+{
+  "components/themes/banner/hero__overlay_h3": "<div class=\"hero_h3 hero--small hero__overla_h3\" style=\"background: url({{lang 'ap-base-2.banner-overlay.image-background'}}) no-repeat top left;\">\r\n    <div class=\"hero__inner_h3\">\r\n       <div class=\"container text-center feature-row__text\">\r\n          <h2 class=\"h1 mega-title\">{{lang 'ap-base-2.banner-overlay.title'}}</h2>\r\n          <a href=\"{{lang 'ap-base-3.banner-overlay.link'}}\" class=\"btn hero__btn\">\r\n            {{lang 'ap-base-3.banner-overlay.button'}}\r\n          </a>\r\n       </div>\r\n    </div>\r\n </div>\n"
+}

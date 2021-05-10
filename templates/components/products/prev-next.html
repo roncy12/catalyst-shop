@@ -1,0 +1,35 @@
+
+<div class="prev-next-container" ></div>
+
+<script>  
+	var _site_key = "ctl_";
+	
+    var category_id = (sessionStorage.getItem(_site_key+'category_id')) ? sessionStorage.getItem(_site_key+'category_id') : (localStorage.getItem(_site_key+'category_id')) && localStorage.getItem(_site_key+'category_id');
+
+	if(category_id){
+		var _productList = JSON.parse(localStorage.getItem(_site_key+'category_'+category_id));
+		var _productPN = _productList['{{product.id}}'];
+
+		if(!jQuery.isEmptyObject(_productPN)){
+			var _tmpC = jQuery('.prev-next-container');
+			var _prev = '<a class="prev disabled" href="#" onclick="return false;" disabled="disabled" ><span class="fa fa-angle-left" ></span> Previous</a>'; 
+			var _next = '<a class="next disabled" href="#" onclick="return false;" disabled="disabled" >Next <span class="fa fa-angle-right" ></span> </a>';
+			
+			if(!jQuery.isEmptyObject(_productPN.prev)){
+				_link 	=	_productPN.prev.url;
+				_id 	=	_productPN.prev.id;
+				_prev 	= 	'<a class="prev" href="'+_link+'" id="'+_id+'"><span class="fa fa-angle-left" ></span> Previous</a>';
+			}
+			if(!jQuery.isEmptyObject(_productPN.next)){
+				_link 	=	_productPN.next.url;
+				_id 	=	_productPN.next.id;
+				_next 	=	'<a class="next" href="'+_link+'" id="'+_id+'">Next <span class="fa fa-angle-right" ></span> </a>';
+			}
+			_tmpC.html(_prev + _next);					
+		}
+    }              
+</script>
+                
+     
+
+    

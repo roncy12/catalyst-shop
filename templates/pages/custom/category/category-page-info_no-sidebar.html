@@ -1,0 +1,322 @@
+---
+category:
+    shop_by_price: true
+    products:
+        limit: {{theme_settings.categorypage_products_per_page}}
+---
+
+{{#contains settings.facebook_like_button.href 'ajaxLocalStorage' }}
+		{{#if category.products}}
+			<div id="ajaxLocalStorageResult">
+				<div id="ajaxLocalStorage_category_id">
+				{{json (pluck category.products 'id') }}
+				</div>
+				<div id="ajaxLocalStorage_category_url">
+				{{json (pluck category.products 'url') }}
+				</div> 
+			</div>
+		{{/if}}
+{{else}}
+<!--<div id="PrevNext-Data-on">{{inject "prevnextParam" category.id}}</div> parameter condition-->
+
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{#partial "head"}}
+	
+    {{#if pagination.category.previous}}
+        <link rel="prev" href="{{pagination.category.previous}}">
+    {{/if}}
+    {{#if pagination.category.next}}
+        <link rel="next" href="{{pagination.category.next}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+	
+	{{> components/category/session-data }}
+	
+	
+	<div id="gr-dropzone-category_banner_top" class="category_banner b-top"></div>
+	<div class="category-info page">
+		<aside class="page-sidebar" >
+			<div class="item-floater">
+			<div class="sticky-content">
+			<div class="res-model-content">
+			
+			{{#if category.image.data }}
+				<div id="gr-dropzone-category_content_boardimage" class=" _boardimage">
+                <img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage category.image category.image.data use_default_sizes=true }}" alt="Banner Image - {{ category.image.alt }}" >
+				</div>
+			{{else}}
+				<div id="gr-dropzone-category_content_boardimage" class=" _boardimage"></div>
+			
+			{{/if}}	
+
+			<div id="gr-dropzone-category_content_boardlogo" class=" _boardlogo"></div>
+			</div>
+			</div>
+			</div>
+		</aside>
+		
+		<div class="page-content" >
+			<div class="category-heading">
+				<h1 class="page-heading">{{category.name}} </h1>
+				<span class="_showBoardImg">
+					<a class="button" href="#uniqueID" data-reveal-id="viewModelImg">View Image</a>
+				</span>
+				<div id="gr-dropzone-category_content_customboard" class=" _customboard"></div>
+			</div>
+				
+			<div class="category-info-tabs">		
+				<div id="horizontalTab">
+					<ul>
+						<li><a href="#description-tab" class="category-info-tab">Description</a></li>
+						<li><a href="#stockdims-tab" class="category-info-tab">Stock Dims</a></li>
+						<li><a href="#about-tab" class="category-info-tab">About</a></li>
+						<li><a href="#photos-tab" class="category-info-tab">Photos</a></li>
+					    <li><a href="#discussion-tab" class="category-info-tab">Discussion</a></li>
+					</ul>
+
+					<div id="description-tab" class="category-info-tab-content">
+						<div id="gr-dropzone-category_content_description" class=" content_description category_tab_content"></div>
+					</div>
+					<div id="stockdims-tab" class="category-info-tab-content">
+					   <div id="gr-dropzone-category_content_stockdims" class=" content_stockdims category_tab_content"></div>
+					</div>
+					<div id="about-tab" class="category-info-tab-content">
+					   <div id="gr-dropzone-category_content_about" class=" content_about category_tab_content"></div>
+					</div>
+					<div id="photos-tab" class="category-info-tab-content">
+					   <div id="gr-dropzone-category_content_photos" class=" content_photos category_tab_content"></div>
+					</div>
+					<div id="discussion-tab" class="category-info-tab-content">
+						<div id="gr-dropzone-category_content_discussion" class=" content_discussion category_tab_content">
+						    <div id="disqus_thread"></div>
+    						<script type="text/javascript">// <![CDATA[
+                                /**
+                                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                                
+                                var disqus_config = function () {
+                                this.page.url = "{{ category.url }}";  // Replace PAGE_URL with your page's canonical URL variale
+                                this.page.identifier = "{{ settings.request.absolute_path }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                                };
+                                
+                                (function() { // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = 'https://https-catalyst-store-mybigcommerce-com.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                                })();
+                                // ]]>
+                            </script>
+                            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+						    
+						    
+						    
+						    
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</div>
+	
+	
+	<div class="_rawContent" style="display:none;">
+		{{#all (if (length (split category.description "gr-dropzone-category_content_description")) '>' 1) (isArray (split category.description "gr-dropzone-category_content_description")) }}
+			<div id="dynamicDescription_Container"  style="display:none;" >
+				{{{category.description}}}
+			</div>
+		{{else}}
+			<div id="dynamicSnippet_Container"  style="display:none;" >
+				<div class="gr-snippet" data-gr-content="/content/category{{truncate settings.request.absolute_path (subtract (length settings.request.absolute_path) 1) }}.html">loading</div> 
+			</div>
+		{{/all}}
+	
+	
+		{{{snippet 'categories'}}}
+	</div>
+	
+	<div class="page">
+		
+		<!-- no Sidebar -->
+
+		<main class="page-content" id="product-listing-container">
+			<div id="gr-dropzone-category_content_top" class="category_content b-top"></div>
+			
+			{{#if category.products}}
+				{{> components/category/product-listing}}
+			{{else}}
+				<p>{{lang 'categories.no_products'}}</p>
+			{{/if}}
+			
+			<div id="gr-dropzone-category_content_bottom" class="category_content b-bottom"></div>
+			
+		</main>
+	</div>
+	
+	<div id="gr-dropzone-category_banner_bottom" class="category_banner b-bottom"></div>
+
+	<div id="viewModelImg" class="modal modal--large" data-reveal>
+		<a href="#" class="modal-close" aria-label="{{lang 'common.close'}}" role="button">
+			<span aria-hidden="true">&#215;</span>
+		</a>
+		<div class="modal-content"></div>
+		<div class="loadingOverlay"></div>
+	</div>
+
+
+
+	<script src="{{cdn 'assets/jquery.responsiveTabs.min.js'}}"></script>
+	<script type="text/javascript">
+        jQuery(document).ready(function () {
+            var $tabs = jQuery('#horizontalTab');
+            $tabs.responsiveTabs({
+                rotate: false,
+                //startCollapsed: 'accordion',
+                //collapsible: 'accordion',
+                setHash: false,
+				active: 0 ,
+                disabled: [],
+                click: function(e, tab) {
+                  
+                },
+                activate: function(e, tab) {
+                    
+                },
+                activateState: function(e, state) {
+                    //console.log(state);
+                },
+                load: function(e, tab){},
+              
+            });
+            
+            //showHide Tabs
+			function showhideTabsSnippet(){ 
+			      if (jQuery.trim(jQuery('#gr-dropzone-category_content_description ._dc-content-box').html()).length <= 0 ){
+                      //console.log("description");  
+                      jQuery('[href="#description-tab"]').hide();
+			      }else{
+						jQuery('[href="#description-tab"]').show();
+				  }
+			      if (jQuery.trim(jQuery('#gr-dropzone-category_content_stockdims ._dc-content-box').html()).length <= 0 ){
+                      //console.log("stockdims");  
+                       jQuery('[href="#stockdims-tab"]').hide();
+			      }else{
+						jQuery('[href="#stockdims-tab"]').show();
+				  }		      
+			      if (jQuery.trim(jQuery('#gr-dropzone-category_content_about ._dc-content-box').html()).length <= 0 ){
+                      //console.log("about");  
+                       jQuery('[href="#about-tab"]').hide();
+			      }else{
+						jQuery('[href="#about-tab"]').show();
+				  }		      
+			      if (jQuery.trim(jQuery('#gr-dropzone-category_content_photos ._dc-content-box').html()).length <= 0 ){
+                      //console.log("photos");  
+                       jQuery('[href="#photos-tab"]').hide();
+			      }else{
+						jQuery('[href="#photos-tab"]').show();
+				  }		
+			      
+	    	}
+			
+			if(jQuery('#dynamicSnippet_Container').length > 0 ){
+				var reinitData = setInterval(function() {
+					if(jQuery('#dynamicSnippet_Container').find('.gr-snippet').length == 0 ){
+						showhideTabsSnippet();
+						clearInterval(reinitData);
+					}	   
+				}, 100);
+			}
+			
+			if(jQuery('#dynamicDescription_Container').length > 0 ){
+				var _obs_time = 0;
+				var reinitData = setInterval(function() {
+					_obs_time = _obs_time + 100
+					showhideTabsSnippet();
+					if(_obs_time >= 10000 ){	
+						clearInterval(reinitData);
+					}	   
+				}, 100);	
+			}
+        });
+        
+        
+		 
+			
+        
+        
+    </script>
+	
+	<script>
+		jQuery(document).ready(function () {
+			function contentCleaner(){
+				jQuery('._rawContent p').each(function(){
+					if(jQuery(this).text().trim() == ""){
+						jQuery(this).hide();
+					}
+				});
+				
+			}
+			//initialize
+			contentCleaner();
+			
+			// View Model Modal
+			function modalBoardImg(){
+				if(jQuery(window).width() < 992){
+					jQuery('.res-model-content').appendTo('#viewModelImg .modal-content');
+				}else{
+					if(jQuery('#viewModelImg .modal-content .res-model-content').length >0 ){
+						jQuery('#viewModelImg .modal-content .res-model-content').appendTo('.item-floater .sticky-content');
+					}
+				}
+				
+			}
+			modalBoardImg();
+			
+			function reinitSizePos(){
+				if(jQuery(window).width() > 991){
+					var _initHeight = jQuery('.sticky-content').height();
+					var _initWidth = jQuery('.sticky-content').width();
+					var _navOffSet = jQuery('.header_nav').height()+20;
+					_tmpHeight = jQuery(window).height() - _navOffSet;
+					tmpWidth = 0;
+					jQuery('.sticky-content').css({'top': _navOffSet-10 });
+					if (_initHeight > _tmpHeight){
+						tmpWidth =  _initWidth * (_tmpHeight/_initHeight);
+						jQuery('.sticky-content').css({'width' : tmpWidth });	
+					}
+					if (_initWidth > jQuery('.item-floater').width()){
+						jQuery('.sticky-content').css({'width' : '' });	
+					}
+				}
+			}
+			
+			var reinitData = setInterval(function() {
+			   if (jQuery('.sticky-content').height() > 0 ) {
+					reinitSizePos();
+					clearInterval(reinitData);
+			   }
+			}, 100); 
+			
+			reinitSizePos();
+			
+			
+			jQuery( window ).resize(function() {
+				modalBoardImg();
+				reinitSizePos();
+			});
+			
+		});
+		
+      
+		
+	
+	</script>
+
+
+
+{{/partial}}
+{{> layout/base}}
+
+{{/contains}}

@@ -1,0 +1,3 @@
+{
+  "components/themes/banner/banner-h3": "<div class=\"block_img effect_image\">\r\n        <a href=\"{{lang 'ap-base-3.brandlist-banner.link-banner'}}\">\r\n        <img src=\"{{lang 'ap-base-3.brandlist-banner.image-banner'}}\" alt=\"banner\" class=\"responsive\">\r\n        </a>\r\n     </div>\n"
+}

@@ -1,0 +1,136 @@
+// -----------------------------------------------------------------------------
+// CUSTOM CSS OVERRIDE - CHECKOUT //
+// -----------------------------------------------------------------------------
+@font-face {
+    font-family: 'BebasNeue-Regular';
+	src: url('../fonts/BebasNeue-Regular-webfont.eot');
+	src: url('../fonts/BebasNeue-Regular-webfont.eot?#iefix') format('eot'),
+	url('../fonts/BebasNeue-Regular-webfont.ttf') format('truetype');
+	font-weight: normal !important;
+	font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans-Regular';
+	src: url('../fonts/OpenSans-Regular-webfont.eot');
+	src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('eot'),
+	url('../fonts/OpenSans-Regular-webfont.svg') format('svg'),
+	url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;	
+}
+
+@font-face {
+    font-family: "OpenSans-SemiBold";
+    src: url('../fonts/OpenSans-SemiBold-webfont.eot');
+	src: url('../fonts/OpenSans-SemiBold-webfont.eot?#iefix') format('eot'),
+	url('../fonts/OpenSans-SemiBold-webfont.svg') format('svg'),
+	url('../fonts/OpenSans-SemiBold-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;	
+}
+
+@font-face {
+    font-family: "OpenSans-Bold";
+    src: url('../fonts/OpenSans-Bold-webfont.eot');
+	src: url('../fonts/OpenSans-Bold-webfont.eot?#iefix') format('eot'),
+	url('../fonts/OpenSans-Bold-webfont.svg') format('svg'),
+	url('../fonts/OpenSans-Bold-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;	
+}
+// -----------------------------------------------------------------------------
+// Global //
+// -----------------------------------------------------------------------------
+body,.button ,button, input, p ,a ,label,span,ul,li, h1, h2, h3, h4, h5, h6 {
+	font-family:  "OpenSans-Regular";
+	/* font-list OpenSans-Bold, OpenSans-SemiBold,OpenSans-Light, OpenSans-Italic; */
+}
+
+.optimizedCheckout-header{
+background-color: #050505;
+}
+
+.optimizedCheckout-headingPrimary{
+	font-family: BebasNeue-Regular;
+	font-size: 36px;
+    font-weight: normal;
+	line-height: 1;
+    margin-top: 7px;
+}	
+
+.checkout-step {
+    border-bottom: 1px solid #020202;
+}	
+
+.stepHeader-counter::before{
+	font-weight: bold;
+}
+
+@media (min-width: 551px){
+	.checkoutHeader-content {
+		padding: 3rem;
+	}
+	.checkoutHeader {
+		min-height: 7.23077rem;
+	}
+
+}
+
+.optimizedCheckout-buttonPrimary{
+	font-weight: bold;
+}
+
+.optimizedCheckout-form-input , .form-select ,.form-actions .button{
+	border-radius: 0;
+	border-color:#020202;
+}
+
+.stepHeader-actions .button {
+    margin-bottom: 0;
+    background: #020202;
+    color: #ffffff;
+	
+	&:hover {
+		color: #51d9ea;
+	}
+}
+
+a:hover{
+	color: #51d9ea;
+}
+
+
+.cart-header{
+	background: #020202;
+	
+	.optimizedCheckout-headingSecondary {
+		color: #ffffff;
+	}
+}
+
+
+
+
+
+#checkout-app{
+	@media (min-width: 1560px){
+		margin-bottom: 6%;
+	}
+}
+
+.checkout.footer-copyright{
+	text-align: center;
+    background: #131313;
+    padding: 15px;
+	
+	@media (min-width: 1560px){
+		position: fixed;
+		width: 100%;
+		bottom: 0;
+	}
+	
+	span{
+		color: #cccccc;
+	}
+}

@@ -1,0 +1,124 @@
+{{#partial "page"}}
+
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+<main class="page cms-page-css page-id-{{ page.id }}-css">
+    <h1 class="page-heading">{{ page.title }}</h1>
+    {{#if page.sub_pages}}
+    <nav class="navBar navBar--sub">
+        <ul class="navBar-section account-navigation">
+        {{#each page.sub_pages}}
+            <li class="navBar-item"><a class="navBar-action" href="{{url}}">{{title}}</a></li>
+        {{/each}}
+        </ul>
+    </nav>
+    {{/if}}
+
+	
+    <div class="page-content page-content--centered _location">
+        {{#replace '%%Syndicate%%' page.content}}
+            {{> components/page/rss_feed}}
+        {{else}}
+           {{{page.content}}}
+            
+            <div class="grid grid--no-gutters image-bar clearfix location-ig">
+            	<div class="section__title">
+                    <h2 class="page-heading BebasNeue">
+                        FOLLOW US ON INSTAGRAM
+                    </h2>
+            	</div>
+            
+            	<div id="ctl-instagram-feed"  ></div>
+             
+            	<script src="{{cdn 'assets/InstagramFeed-slick.min.js'}}"></script>
+            
+            	<script>
+            		var slick_option = {
+                    "dots": false,
+                    "arrows": true,
+                    "mobileFirst": true,
+                    "slidesToShow": 1,
+                    "slidesToScroll": 1,
+                    "rows":1,
+            		"autoplaySpeed": 3000,
+                    "autoplay": true,
+            		"infinite": true,
+                    "responsive": [
+                        {
+                            "breakpoint": 1260,
+                            "settings": {
+                                "slidesToScroll": 4,
+                                "slidesToShow": 4
+            				
+                            }
+            				
+                        },
+                        {
+                            "breakpoint": 992,
+                            "settings": {
+                                "slidesToScroll": 3,
+                                "slidesToShow": 3
+                            }
+                        },
+            			
+                        {
+                            "breakpoint": 550,
+                            "settings": {
+                                "slidesToScroll": 2,
+                                "slidesToShow": 2
+                            }
+                        }
+                    ]
+                };
+
+            	var _igFlag = 0;
+            	jQuery(window).on('scroll', function (e) {
+            		if(_igFlag==0){
+            			jQuery.instagramFeed({
+            				'username': jQuery('#ig_username').val(),
+            				'container': document.getElementById("ctl-instagram-feed"),
+            				'slick_slider': true, //if slick_slider is true profile and biography are auto nulled
+            				'display_profile': false,
+            				'display_biography': false,
+            				'display_gallery': true,
+            				'display_igtv': true,
+            				'callback': null,
+            				'styling': false,
+            				'items': {{lang 'ap-base-1.instagram-feed.items' }},
+            				'items_per_row': 4,
+            				'margin': 1 ,
+							'slick': '#ctl-instagram-feed > div',
+							'slick_option': slick_option
+            			});
+            			_igFlag = 1;
+            		}
+            	});
+            		
+            	
+            	</script>	
+
+            	
+            </div>
+                        
+          
+          
+            
+        {{/replace}}
+    </div>
+
+    {{#if page.feed}}
+        <ul>
+            {{#each page.feed}}
+                <li>
+                    <h6><a href="{{url}}" target="_blank">{{title}}</a></h6>
+                    <p>{{content}}</p>
+                </li>
+            {{/each}}
+        </ul>
+    {{/if}}
+</main>
+
+
+{{/partial}}
+
+{{> layout/base}}

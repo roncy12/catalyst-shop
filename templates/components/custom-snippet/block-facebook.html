@@ -1,0 +1,19 @@
+<div class="facebook-block">
+<h3 style="text-align:center;">{{theme_settings.facebook-title}}</h3>
+<div class="fb-page" data-href="{{ theme_settings.facebook-url }}" data-tabs="timeline" data-small-header="{{ theme_settings.fb-showheader }}" data-adapt-container-width="{{ theme_settings.fb-fitwidth }}" data-hide-cover="{{ theme_settings.fb-coverimage }}" data-show-facepile="{{ theme_settings.fb-listfriend }}">
+<blockquote cite="{{ theme_settings.facebook-url }}" class="fb-xfbml-parse-ignore">
+    <a href="{{ theme_settings.facebook-url }}" title="{{settings.store_name}} on Facebook"></a>
+  </blockquote>
+</div>
+<div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+    fjs.parentNode.insertBefore(js, fjs);
+  }
+   (document, 'script', 'facebook-jssdk'));
+</script>
+</div>

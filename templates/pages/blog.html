@@ -1,0 +1,67 @@
+---
+blog:
+    posts:
+        limit: 9
+        pages: 3
+        summary: 100
+---
+{{#contains settings.facebook_like_button.href 'ajaxLocalStorage' }}
+	
+	{{> components/common/prevnext/prevnext_data prevnext_list=blog.posts prevnext_id='url' prevnext_url='url' }}
+	
+{{else}}
+<div id="PrevNext-Data-on">{{inject "prevnextParam" "blogList"}}</div> 
+{{#partial "page"}}
+<div class="page reverse-css">
+    <h1 class="page-heading">{{ blog.name }}</h1>
+	<aside class="page-sidebar">
+	<div class="sidebarBlock blog-tags">
+		<h5 class="sidebarBlock-heading">Tags</h5>
+		<ul class="tags ">
+		{{#each (pluck blog.posts 'tags') }}
+			{{#each this }}
+			<li class="tag">
+			<a class="tag-label" data-tag="{{ name }}" href="{{ url }}"><span class="hashtag">#</span>{{ name }}</a>
+			</li>
+			{{/each}}
+		{{/each}}
+		</ul>
+	</div>
+	<script>
+		//remove duplicates
+		var seen = {};
+		jQuery('.blog-tags .tag-label').each(function() {
+			txt = $(this).text();
+			(seen[txt]) ? jQuery(this).remove() : seen[txt] = true;
+			if(seen[txt]){
+				(jQuery('.breadcrumb-label').last().text().trim() == txt.replace('#','').trim()) &&  jQuery(this).addClass('selected-tag');
+			}
+		});
+	</script>
+	
+	</aside>	
+	
+	<main class="page-content" >
+    {{#if theme_settings.blog_masonry}}
+     <div class="grid">
+    {{#each blog.posts}}
+        {{> components/blog/post post=this settings=../settings show_top_sc=true}}
+    {{/each}}
+    </div>
+    {{else}}
+    {{#each blog.posts}}
+        {{> components/blog/post post=this settings=../settings show_top_sc=true}}
+    {{/each}}
+    {{/if}}
+    {{> components/common/paginator pagination.blog}}
+	</main>
+	
+
+	
+</div>
+
+
+{{/partial}}
+{{> layout/base}}
+
+{{/contains}}

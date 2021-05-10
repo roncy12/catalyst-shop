@@ -1,0 +1,147 @@
+   <ul id="slider-facet-data-{{dashcase all_facets }}" class="navList" >
+        {{#each facets}}
+            {{#if facet '===' ../all_facets}}
+                {{#each items}}
+                    <li class="navList-item"><a
+                        href="{{url}}"
+                        class="navList-action navList-action--checkbox {{#if selected }} is-selected {{/if}}"
+                        rel="nofollow"
+						data-facet-value="{{{title}}}"
+                        data-id="{{ id }}"
+                        data-faceted-search-facet>{{{title}}} ({{count}})</a></li>
+                {{/each}}
+            {{/if}}
+        {{/each}}
+    </ul>
+
+<div id="{{dashcase all_facets }}-minmax-slider">
+
+	<style type="text/css">
+		#slider-facet-data-{{dashcase all_facets }}  { display:none !important;}
+		#{{dashcase all_facets }}-minmax-slider .slider-flex-box{ 
+			margin: 10px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		#{{dashcase all_facets }}-minmax-slider .enclosure {font-weight: bold;}
+		#{{dashcase all_facets }}-minmax-slider .enclosure-val {font-weight: bold;}
+		#{{dashcase all_facets }}-minmax-slider .apply-button{
+			background: black;
+			color: #FFF;
+			border-radius: 5px;
+			padding: 2px 10px;
+			text-transform: uppercase;
+		}
+		
+		
+	    .facetFilterData-{{dashcase facet}} { display:none !important;}
+
+	</style>
+	
+	<script>
+		jQuery(document).ready(function () {
+			//console.log("init slider");
+			var _minmaxFacet,_facetValues=[];
+			var _currentMinMax, _currentValues=[];
+			
+			function nonNumericFix(values){
+				_tmpString = String(values).replace(/^(-)|[^0-9.]+/g, '');
+				//(isNaN(parseFloat(_tmpString))) ? _tmpString = 0 : _tmpString = parseFloat(_tmpString) ;
+				return parseFloat(_tmpString)
+			}
+			
+			jQuery('#slider-facet-data-{{dashcase all_facets }} .navList-item a').each(function(i,e){
+				_nonNumericFix = nonNumericFix(jQuery(e).data('facet-value'));
+				if(!isNaN(_nonNumericFix)){
+					_facetValues.push(_nonNumericFix); 
+					(jQuery(e).hasClass('is-selected')) ? _currentValues.push(_nonNumericFix) : ''; 
+				}
+			});	
+			//console.log(_facetValues);
+			
+			function minmaxData(values){
+				new_values = values.sort(function(a, b) { return a - b; });	
+				values = new_values.filter(function(x) {
+					return x <= 120;
+				});
+				return [values[0],values[values.length-1]];
+			}
+			
+			if(_facetValues.length >0){
+				_minmaxFacet = minmaxData(_facetValues);
+				(_currentValues.length >0) ? _currentMinMax = minmaxData(_currentValues) : _currentMinMax = _minmaxFacet;
+				
+				jQuery("#{{dashcase all_facets }}-slider-label").html(_currentMinMax[0] + " ] - [ " +_currentMinMax[1]);
+
+				
+				/*
+				if(jQuery('.facetedSearch-refineFilters ul  #{{dashcase all_facets }}-filterSliderValue').length <= 0 ){
+					jQuery('.facetedSearch-refineFilters ul ').append('<li>'+jQuery('#{{dashcase all_facets }}-filterSelectedData').html()+'</li>');
+				}
+				jQuery('#{{dashcase all_facets }}-filterSliderValue').attr('href', jQuery('#facetSliderData-{{dashcase facet}}').data('ap-facetremove-data'));
+				jQuery('#{{dashcase all_facets }}-filterSliderValue .filterDataValue-{{dashcase all_facets }}').html(_currentMinMax[0] + " - " +_currentMinMax[1]);
+				*/
+					
+				jQuery("#{{dashcase all_facets }}-bar-slider").slider({
+					range: true,
+					min: _minmaxFacet[0],
+					max: _minmaxFacet[1],
+					step: .01,
+					values: _currentMinMax,
+					change: minmaxProcessor
+				});
+			}
+			
+			function minmaxProcessor(event, ui){
+				_currentMinMax = ui.values;
+				_maxParam = 100;
+				_indexParam = 0;
+				_consoleData='';
+				_longParam ='';	
+				
+				jQuery("#{{dashcase all_facets }}-slider-label").html(_currentMinMax[0] + " ] - [ " +_currentMinMax[1]);
+				
+				_longParam = jQuery('#facetSliderData-{{dashcase all_facets }}').data('ap-facetremove-data');		
+				//console.log(_longParam );
+				jQuery('#slider-facet-data-{{dashcase all_facets }} .navList-item a').each(function(i,e){
+				
+					if(i==0 && ((typeof _longParam === "undefined")|| _longParam == '')) { 
+						_longParam = jQuery(e).attr('href');
+						_longParam = _longParam.replace('&LITERS%5B%5D='+jQuery(e).data('facet-value'),'').replace('&LITERS='+jQuery(e).data('facet-value'),'');
+					}
+					
+					_nonNumericFix = nonNumericFix(jQuery(e).data('facet-value'));
+					//console.log(_nonNumericFix + " -- " + _currentMinMax[0] + " - " + _currentMinMax[1]);
+					if ( parseFloat(_nonNumericFix) >= _currentMinMax[0] &&  parseFloat(_nonNumericFix) <= _currentMinMax[1]){
+						if(_indexParam <= _maxParam){
+							_longParam += '&{{ all_facets }}%5B%5D='+jQuery(e).data('facet-value');
+							_indexParam++;
+						}else{
+							_consoleData='Range values exceed. Capping parameters to comply on BC maximum query limit';
+						}
+					}
+				});
+				(_consoleData) ? console.log(_consoleData) : '';
+				jQuery('#{{dashcase all_facets }}-clone-data').attr("href",_longParam);
+			}
+		});
+	  
+	</script>
+	<div id="{{dashcase all_facets }}-filterSelectedData" style="display:none !important;">
+		<a href="" id="{{dashcase all_facets }}-filterSliderValue" class="facetLabel" rel="nofollow" data-faceted-search-facet="{{ all_facets }}"> 
+			<span class="filterDataValue-{{dashcase all_facets }}"></span>
+			<svg class="icon"> <use xlink:href="#icon-close"></use> </svg> 
+		</a>
+	</div>
+	<div id="{{dashcase all_facets }}-bar-slider"></div>
+	<div class="slider-flex-box">
+		<a id="{{dashcase all_facets }}-clone-data" href="" class="apply-button" rel="nofollow"
+						data-facet-value="{{dashcase all_facets }}"
+                        data-id="{{dashcase all_facets }}"
+                        data-faceted-search-facet>Apply</a>
+		<label class="{{dashcase all_facets }}-value">
+			<span class="enclosure"> [ </span><span id="{{dashcase all_facets }}-slider-label" class="enclosure-val" ></span><span class="enclosure"> ] </span>
+		</label>	
+	</div>
+</div>

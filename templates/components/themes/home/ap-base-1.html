@@ -1,0 +1,40 @@
+<div class="{{lang 'ap-base-1.slideshow.on-off-section' }}  block-hero-1"> 
+    {{#block "hero"}} {{/block}}
+</div>
+
+<div class="container">
+    {{#if banners.top}}
+    <div class="grid grid--no-gutters image-bar clearfix">
+		<div class="row">
+            {{{limit banners.top 1}}}
+        </div>
+    </div>
+	{{else}}
+	
+    <div class="{{lang 'ap-base-1.bannertop.on-off-section' }} section-customboards big-section-index section-banner "> 
+        {{> components/themes/sections/section section="pibags1"}}
+    </div>
+	
+	{{/if}}
+	  
+	<div class="{{lang 'ap-base-1.accessories.on-off-section' }}  section-accessories big-section-index">
+        {{> components/themes/sections/section section="pibags-accessories"}}
+    </div> 
+
+</div>
+    <div class="{{lang 'ap-base-1.bannermiddle.on-off-section' }} section-boardslider"> 
+        {{> components/themes/sections/section section="pibags-boardslider"}}
+    </div>
+    <div class="container">
+        <div class="{{lang 'ap-base-1.featured-products.on-off-section' }} section-igfeed">
+            {{> components/themes/sections/section section="pibags-igfeed"}}
+        </div> 
+    </div>
+    
+    {{#if banners.bottom}}
+        <div class="banner-bottom" data-banner-location="bottom">
+            <div class="banner banner-bottom">
+             {{{limit banners.bottom 1}}}
+            </div>
+        </div>
+    {{/if}}

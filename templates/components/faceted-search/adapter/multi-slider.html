@@ -1,0 +1,10 @@
+<style> 
+	#facetedSearch-content--{{ facet }} {display:none;} 
+	.facetFilterData-{{dashcase facet}} { display:none !important;}
+</style>
+{{{stylesheet '/assets/jquery-ui.css'}}}
+<script src="{{cdn 'assets/jquery-ui.min.js'}}"></script>
+<div class="faceted-data" id="facetSliderData-{{dashcase facet}}" data-ap-facetedsearch-data="{{ facet }}" data-ap-facetremove-data="{{ remove_url }}" ></div>
+		
+
+	

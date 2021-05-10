@@ -1,0 +1,42 @@
+{{#partial "page"}}
+
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+<main class="page cms-page-css page-id-{{ page.id }}-css">
+	<div class="page-content--centered">
+	<div class="cms-content contact-form">
+	<div class="flex-box-panel">
+	
+	<div id="gr-dropzone-contact-us_main" class="contact-us_main flex-item panel-main " >
+		<h1 class="page-heading">{{page.title}}</h1>
+
+		{{#if page.sub_pages}}
+			<nav class="navBar">
+				<ul class="navBar-section">
+					{{#each page.sub_pages}}
+						<li class="navBar-item"><a class="navBar-action" href="{{url}}">{{title}}</a></li>
+					{{/each}}
+				</ul>
+			</nav>
+		{{/if}}
+
+		<div class="form-container">
+			{{#if forms.contact.success}}
+				{{{lang 'forms.contact_us.successful' shopPath=urls.home}}}
+			{{else}}
+				<p>{{{page.content}}}</p>
+				{{> components/page/contact-us-form}}
+			{{/if}}
+
+		</div>
+	</div>
+	<div id="gr-dropzone-contact-us_left" class="contact-us_left flex-item panel-left" ></div>
+	<div id="gr-dropzone-contact-us_right" class="contact-us_right flex-item panel-right" ></div>
+	</div>
+	</div>
+	</div>
+</main>
+
+{{/partial}}
+
+{{> layout/base}}

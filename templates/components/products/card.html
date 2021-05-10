@@ -1,0 +1,123 @@
+<article class="card {{#if alternate}}card--alternate{{/if}} clearfix">
+    <figure class="card-figure">
+        {{#or price.non_sale_price_with_tax price.non_sale_price_without_tax}}
+            {{#if theme_settings.product_sale_badges '===' 'sash'}}
+                <div class="sale-flag-sash">
+                    <span class="sale-text">Sale</span>
+                </div>
+            {{else if theme_settings.product_sale_badges '===' 'topleft'}}
+                <div class="sale-flag-side">
+                    <span class="sale-text">Sale</span>
+                </div>
+            {{else if theme_settings.product_sale_badges '===' 'burst'}}
+                <div class="starwrap">
+                    <div class="sale-text-burst">Sale</div>
+                    <div class="sale-flag-star"></div>
+                </div>
+            {{/if}}
+        {{/or}}
+        <a href="{{url}}{{ param }}" class="product_img_link">
+            <img class="card-image lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image 'productgallery_size' (cdn theme_settings.default_image_product)}}" alt="{{image.alt}}" title="{{image.alt}}">
+            {{#each (limit images 2)}}
+                {{#if @index '>' 0}}
+                <span class="product-additional" data-product-id="{{id}}">            
+                 <img class="replace-2x img-responsive" src="{{getImage this 'productgallery_size' (cdn theme_settings.default_image_product)}}" alt="{{this.alt}}" title="{{this.alt}}">
+                </span>
+                {{/if}}
+            {{/each}}
+        </a>
+        <figcaption class="card-figcaption">
+            <div class="card-figcaption-body flex-box">
+                {{#unless hide_product_quick_view}}
+                    {{#if theme_settings.show_product_quick_view}}
+                        <div class="flex-item flex-quick-view">
+                        <a href="#" class="button button--small card-figcaption-button quickview" data-product-id="{{id}}"><span class="hidden">{{lang 'products.quick_view'}}</span>
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        </div>
+                    {{/if}}
+                {{/unless}}
+                  {{#if show_compare}}
+                   <div class="flex-item flex-compare">
+                        <label class="button button--small card-figcaption-button" for="compare-{{id}}">
+                            <input type="checkbox" name="products[]" value="{{id}}" id="compare-{{id}}" data-compare-id="{{id}}" class="checkbox-compare add-item-compare">                        
+                            <i class="fa fa-plus-square"></i>
+                        </label>
+                    </div>
+                {{/if}}
+                {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                {{#if show_cart_action}}
+                    {{#if has_options}}
+                     <div class="flex-item flex-cart">
+                        <a href="{{url}}{{ param }}" class="button button--small card-figcaption-button" data-product-id="{{id}}"><i class="fa fa-shopping-cart"></i><span>{{lang 'products.choose_options'}}</span></a>
+                     </div>
+                    {{/if}}
+                    {{#if pre_order}}
+                    <div class="flex-item flex-cart">
+                        <a href="{{url}}{{ param }}" class="button button--small card-figcaption-button"><i class="fa fa-shopping-cart"></i><span>{{lang 'products.pre_order'}}</span></a>
+                     </div>
+                    {{/if}}
+                    {{#if add_to_cart_url }}
+                    <div class="flex-item flex-cart">
+                        <a href="{{add_to_cart_url}}" class="button button--small card-figcaption-button"><i class="fa fa-shopping-cart"></i><span>{{lang 'products.add_to_cart'}}</span></a>
+                        </div>
+                    {{/if}}
+                    {{#if out_of_stock_message }}
+                    <div class="flex-item flex-cart">
+                        <a href="{{url}}{{ param }}" class="button button--small card-figcaption-button" data-product-id="{{id}}"><i class="fa fa-shopping-cart"></i><span>{{out_of_stock_message}}</span></a>
+                        </div>
+                    {{/if}}
+                {{/if}}
+            {{/or}}
+                {{#if setting_show.show_wishlist }}
+                <div class="box-wishlist flex-item flex-wishlist {{#if show_compare}}true-compare {{/if}}">
+                    <form class="form" method="post" action="{{add_to_wishlist_url}}" data-wishlist-add>
+                        <div class="form-action">
+                            <input type="hidden" name="variation_id" value="">
+                            {{!--<input class="button button--small card-figcaption-button" type="submit" value="{{lang 'account.wishlists.add_item'}}">--}}
+                            <button class="button button--small card-figcaption-button" type="submit"><span class="hidden">{{lang 'products.wishlist'}}</span>
+                                <i class="fa fa-heart"></i>                             
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            {{/if}}
+            </div>
+        </figcaption>
+    </figure>
+    <div class="card-body">
+         <p class="card-title">
+            <a href="{{url}}{{ param }}">{{name}}</a>
+         </p>
+        {{#if show_rating}}
+            <p class="card-text card-rating" data-test-info-type="productRating">
+                <span class="rating--small">
+                    {{> components/products/ratings rating=rating}}
+                </span>
+            </p>
+        {{/if}}
+        <div class="card-text card-price" data-test-info-type="price">
+            {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                {{> components/products/price price=price customer=customer}}
+            {{else}}
+                {{> components/common/login-for-pricing}}
+            {{/or}}
+        </div>
+         {{#if theme_settings.show_product_card_countdown}}
+        <div class="deal-clock lof-clock-{{id}}-detail">
+            <time>
+            {{#each custom_fields}}
+            {{#if name '===' 'countdown'}}
+                {{{value}}}
+            {{/if}}
+            {{/each}}
+            </time>
+        </div>
+        {{/if}}
+        {{#if summary}}
+        <div class="description">
+            <p>{{{summary}}}</p>
+            </div>
+        {{/if}}
+    </div>
+</article>

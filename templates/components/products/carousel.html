@@ -1,0 +1,46 @@
+<div class="section__title">
+        <h2 class="page-heading">
+            {{lang 'ap-base-1.new-products.new' }}
+            <span class="text-des text-center">{{lang 'ap-base-1.new-products.description' }}</span>
+        </h2>
+</div>
+<section class="productCarousel"
+    data-slick='{
+        "dots": false,
+        "arrows": true,
+        "mobileFirst": true,
+        "slidesToShow": 2,
+        "slidesToScroll": 2,
+        "rows":{{ rows }},
+        "autoplay": true,
+        "responsive": [
+            {
+                "breakpoint": 1260,
+                "settings": {
+                    "slidesToScroll": {{ columns }},
+                    "slidesToShow": {{ columns }}
+                }
+            },
+            {
+                "breakpoint": 992,
+                "settings": {
+                    "slidesToScroll": 3,
+                    "slidesToShow": 3
+                }
+            },
+            {
+                "breakpoint": 550,
+                "settings": {
+                    "slidesToScroll": 2,
+                    "slidesToShow": 2
+                }
+            }
+        ]
+    }'
+>
+    {{#each products}}
+    <div class="productCarousel-slide product">
+        {{> components/products/card theme_settings=../theme_settings customer=../customer show_rating=../settings.show_product_rating show_compare=../settings setting_show = ../settings}}
+    </div>
+    {{/each}}
+</section>

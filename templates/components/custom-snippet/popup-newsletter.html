@@ -1,0 +1,45 @@
+{{#if theme_settings.popup-show}}
+ {{#if template_file '===' 'pages/home' }}
+<div id="popup-overlay"></div>
+<div id="popup-newsletter" data-expires="1" data-delay="500" style="background:url({{lang 'popup-newsletter.background'}}) no-repeat center center;background-size:cover;">
+	<a href="#closepopup" id="popup-close">x</a>
+	<h3 class="newsletter-heading">{{lang 'popup-newsletter.popup-title'}}</h3>	
+	<p class="newsletter-description">{{lang 'popup-newsletter.popup-des'}}</p>
+	<div class="newsletter-form">
+		<form class="form" action="{{urls.subscribe.action}}" method="post">
+			<fieldset class="form-fieldset">
+				<input type="hidden" name="action" value="subscribe">
+				<input type="hidden" name="nl_first_name" value="bc">
+				<input type="hidden" name="check" value="1">
+				<div class="form-field">
+					<label class="form-label is-srOnly" for="nl_email">{{lang 'common.email_address'}}</label>
+					<div class="form-prefixPostfix wrap">
+						<input class="form-input" id="nl__email" name="nl_email" type="email" value="{{customer.email}}" placeholder="{{lang 'newsletter.email_placeholder'}}">
+						<input class="button button--primary form-prefixPostfix-button--postfix" type="submit" value="Subscribe">
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<div class="social-block">
+		<ul>
+			<li>
+				<a class="instagram" target="_blank" href="{{ theme_settings.newsletter_instagram_link }}" title="{{ settings.store_name }} on Instagram" class="btn-social-newsletter" data-original-title="Instagram">
+					<i class="ct-img ct-icon-instagram"></i></a>				
+				</a>
+			</li>
+			<li>
+				<a class="facebook" target="_blank" href="{{ theme_settings.newsletter_facebook_link }}" title="{{ settings.store_name }} on Facebook" class="btn-social-newsletter" data-original-title="Facebook">
+					<i class="ct-img ct-icon-facebook"></i></a>
+				</a>
+			</li>
+			<li>
+				<a class="youtube" target="_blank" href="{{ theme_settings.newsletter_youtube_link }}" title="{{ settings.store_name }} on Youtube" class="btn-social-newsletter" data-original-title="Youtube">
+					<i class="ct-img ct-icon-youtube"></i>
+				</a>
+			</li>
+		</ul>		
+	</div>
+</div>
+{{/if}}
+{{/if}}

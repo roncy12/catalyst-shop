@@ -1,0 +1,3 @@
+{
+  "components/themes/banner/banner-product-h2": "<div class=\"block_img effect_image\">\r\n\t<a href=\"{{lang 'ap-base-2.categories-home.link-banner-product-right'}}\">\r\n\t  <img src=\"{{lang 'ap-base-2.categories-home.banner-product-right'}}\" alt=\"banner\" class=\"responsive\">\r\n\t</a>\r\n</div>\n"
+}

@@ -1,0 +1,93 @@
+---
+category:
+    shop_by_price: true
+    products:
+        limit: {{theme_settings.categorypage_products_per_page}}
+---
+
+
+
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{#partial "head"}}
+	
+    {{#if pagination.category.previous}}
+        <link rel="prev" href="{{pagination.category.previous}}">
+    {{/if}}
+    {{#if pagination.category.next}}
+        <link rel="next" href="{{pagination.category.next}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+	
+	{{> components/category/session-data }}
+	<div id="gr-dropzone-category_banner_top" class="category_banner b-top"></div>
+	
+	<div class="gr-dropzone" data-gr-zone="gr-dropzone-breadcrumbs"> 
+        <img class="img-breadcrumbs" src="https://cdn11.bigcommerce.com/s-pllu8dargz/product_images/uploaded_images/imagenocategory-breadcrumbs-bg.jpg?v=3" alt="" />
+    </div>
+
+	
+	<h1 class="page-heading">{{#if name '==' 'Custom Surfboard' }}CUSTOM ...LOST SURFBOARD{{else}}{{category.name}}{{/if}}</h1>
+	
+	
+	<div id="gr-dropzone-category_content_top" class="hide-load"></div>
+	
+	<div class="_rawContent" style="display:none;">
+	{{{category.description}}}
+	{{{snippet 'categories'}}}
+	</div>
+	
+	<div class="page">
+	    <div class="board-advisor-container">
+		<script type="text/javascript">
+			var path = (window.location.hostname == "localhost" ? "http://localhost/Shape3dWeb/" : "https://www.shape3d.com/");
+			var script = document.createElement('script');
+			script.type = 'text/javascript';
+			script.src = path + "js/Shape3d.js?R=" + Date.now();
+			jQuery("head").append(script);
+			script = document.createElement('script');
+			script.type = 'text/javascript';
+			script.src = path + "js/BoardDesignerIntegration.js?R=" + Date.now();
+			jQuery("head").append(script);
+			var interval = setInterval(function () {
+				if (typeof getParams == "function" && typeof Shape3dIntegration == "function") {
+					clearInterval(interval);
+					new Shape3dIntegration("BoardAdvisor.html", 104483, null, null, 106);
+				}
+			}, 50);
+		</script>
+		<div id="divPlaceHolder" style="position: relative;overflow: hidden">
+			<iframe id="designerFrame" style="display: block;width: 100%;height: 700px;border-style: none" scrolling="no" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+		</div>
+	    </div>
+	    <div style="max-width: 1000px; margin-left: auto; margin-right: auto; padding-top: 10px;">
+    <h3 style="text-align: center;"><span style="color: #000000;">Additional Information</span></h3>
+    <p style="text-align: center;"><span style="color: #000000;">Custom order surfboards have never been easier than here at catalyst. All you have to do is utilize our 3D Board Builder above or <span>fill out the Custom Order Form and</span>&nbsp;hold tight while we review your submission and confirm that everything is filled out correctly. After confirming accuracy your form will be submitted and the wait time begins. From that point on we will keep you updated on your order's progress, as well as answer any questions you may have! The average wait time is 14-16 weeks. If art is requested and or an epoxy construction please allow another 1-2 weeks to the completion time frame. *Make sure to think long and hard about your Custom Order Form as changes to your order after submission are forbidden! Please ask any and all quetions you have prior to us submitting your form to ensure satisfaction and accuracy. Always feel free to print your sheet and bring it in to one of our stores for questions, pay the deposit, and to be submitted. If you cancel your custom order after submission the $150 deposit will be forfeited. Upon completion, custom surfboards can be picked up from our Catalyst San Clemente store location or we can ship it to you (shipping fee will be charged - $49 if 5'8 or shorter, $99 if 5'9 or longer). <span>Please note that we charge $99 shipping with the deposit. If you do not need the board shipped, that amount will be applied to the cost of the board. Same thing if the board is 5'8 or shorter, the $50 difference will go towards the board. If final payment is not made within 2 months of board being completed your deposit will be forfeit.&nbsp;</span>*Please follow these links for Custom Logo Placements, Custom ...Lost Logos, and Art choices for your custom. All these items will have specific serial numbers which you are to provide in the Additional Comments so we know exactly what you want!</span></p>
+    <dl class="item-options">
+        <dd>
+            <dl class="item-options">
+                <dd>
+                    <p></p>
+                </dd>
+            </dl>
+        </dd>
+    </dl>
+    <p style="text-align: center;"><strong><a href="http://lostsurfboards.net/art/" title="LOST ART" target="_blank">CLICK HERE FOR ART OPTIONS</a>. <a href="http://lostsurfboards.net/custom-logo-placement/" title="LOGO PLACEMENT" target="_blank">CLICK HERE FOR LOGO PLACEMENTS</a>. <a href="http://lostsurfboards.net/custom-lost-color-logos/" title="LOGO COLOR" target="_blank">CLICK HERE FOR LOGO COLORS.</a></strong></p>
+    <dl class="item-options">
+        <dd>
+            <p style="text-align: center;"><span style="color: #000000;">Don't see your model above? More to come very soon. In the mean time,</span> <a href="custom-order-form"><strong>CLICK HERE</strong></a><span style="color: #000000;"> for our custom order form.</span></p>
+        </dd>
+    </dl>
+</div>
+
+	</div> 
+	<div id="gr-dropzone-category_content_bottom" class="hide-load"></div>
+	
+	<div id="gr-dropzone-category_banner_bottom" class="category_banner b-bottom"></div>
+
+ 
+
+{{/partial}}
+{{> layout/base}}
+

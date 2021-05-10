@@ -1,0 +1,104 @@
+{{#if banners.bottom}}
+    {{#if settings.data_tag_enabled}}
+        <div class="banners" data-banner-location="bottom">
+            {{#each (limit banners.bottom_metadata 1)}}
+                <div class="banner" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-name="{{this.banner-name}}">
+                    <div data-event-type="promotion-click">
+                        {{{this.content}}}
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="banners" data-banner-location="bottom">
+            <div class="banner">
+                {{{limit banners.bottom 1}}}
+            </div>
+        </div>
+    {{/if}}
+
+{{/if}}
+
+<div class="{{lang 'ap-base-1.locations.on-off-section' }} section-location">
+    {{> components/themes/sections/section section="location_wrap"}}
+</div> 
+
+<footer class="footer" role="contentinfo">
+    <div class="container">
+       <section class="footer-info clearfix">
+          <article class="col-md-3 col-sm-3 col-xs-12 ct-col1  footer-info-dropdown">
+				<h5 class="footer-info-heading">{{lang 'footer.footer-1.title'}} <i class="fa fa-angle-down"></i></h5>
+				<div class="footer-nav-content">
+                 <ul class="footer-info-list">
+                   <li><a href="/webstore/shipping-returns">Shipping and Returns</a></li>
+                   <li><a href="/webstore/blog">Blog</a></li>
+                   <li><a href="/webstore/contacts">Contact Us</a></li>
+                </ul>
+             </div>
+          </article>
+          <article class="col-md-3 col-sm-3 col-xs-12 ct-col2 footer-info-dropdown">
+            <h5 class="footer-info-heading">{{lang 'footer.footer-2.title'}} <i class="fa fa-angle-down"></i></h5>
+            <div class="footer-nav-content">
+                <ul class="footer-info-list">
+                   <li><a href="/webstore/about-us">About Us</a></li>
+                   <li><a href="/webstore/customer-service">Customer Service</a></li>
+                   <li><a href="/webstore/privacy-policy-cookie-restriction-mode">Privacy Policy</a></li>
+                </ul>
+				
+             </div>
+          </article>
+           <article class="col-md-3 col-sm-3 col-xs-12 ct-col3 ">
+                <h5 class="footer-info-heading">{{lang 'footer.footer-3.title'}} </h5>
+				<div class="footer-nav-content">
+                {{#if settings.show_newsletter_box}}
+				 {{> components/common/subscription-form}}
+				 {{/if}} 
+				 </div>
+          </article>
+           <article class="col-md-3 col-sm-3 col-xs-12 ct-col4 ">
+             <h5 class="footer-info-heading">{{lang 'footer.footer-4.title'}} </h5>
+			 <div class="footer-nav-content ">
+				<div class="payment-box">
+				<img class="lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{cdn 'assets/img/page/payment-icon_paypal.png'}}" />
+				<img class="lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{cdn 'assets/img/page/payment-icon_mastercard.png'}}" />
+				<img class="lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{cdn 'assets/img/page/payment-icon_visa.png'}}" />
+				<img class="lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{cdn 'assets/img/page/payment-icon_amex.png'}}" />
+				<img class="lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{cdn 'assets/img/page/payment-icon_discover.png'}}" />
+				<img class="lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{cdn 'assets/img/page/payment-icon_applepay.png'}}" />
+				</div>
+			 </div>
+             
+          </article>
+    </div>   
+<script>
+jQuery(".footer-info-dropdown").click(function(){
+console.log('ttt');
+	if(!jQuery(this).hasClass('is-open')){
+		jQuery(this).addClass('is-open')
+	}else{
+		jQuery(this).removeClass('is-open')
+	}
+});
+</script>
+	
+    <div class="footer-bottom">
+       <div class="container">
+          <div class="flex-box">
+             {{#if theme_settings.geotrust_ssl_common_name}}
+             <div class="footer-geotrust-ssl-seal">
+                {{> components/common/geotrust-ssl-seal}}
+             </div>
+             {{/if}}
+             <div class="footer-copyright">
+                {{#if theme_settings.show_powered_by}}
+                <span class="powered-by">Powered by <a href="https://www.bigcommerce.com/" rel="nofollow">BigCommerce</a></span>
+                {{/if}}
+                {{#if theme_settings.show_copyright_footer}}
+                <span class="powered-by">&copy; {{moment format="YYYY"}} {{settings.store_name}}. All Rights Reserved.</span>
+                {{/if}}  
+             </div>
+			{{> components/common/social-media-links }}
+          </div>
+       </div>
+    </div>
+ </footer>

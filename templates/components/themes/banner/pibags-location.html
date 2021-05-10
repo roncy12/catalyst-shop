@@ -1,0 +1,128 @@
+<div class="location-container clearfix" >
+
+<div id="slick-location">
+    <div class="location-item order no-padding">
+        <div class="services-wrap">
+			<i class="ct-img ct-icon-location-h "></i>
+            <a href="{{lang 'ap-base-1.locations.locations_link_1'}}" 	>
+				<h4 class="services-title">{{lang 'ap-base-1.locations.locations_title_1'}}</h4> 
+			</a>
+            <p class="services-des">{{#replace '<br>' (lang 'ap-base-1.locations.locations_des_1')}}<br>{{/replace}}</p>
+
+        </div>     
+    </div>   
+    <div class="location-item order no-padding">
+        <div class="services-wrap">
+			<i class="ct-img ct-icon-location-h "></i>
+            <a href="{{lang 'ap-base-1.locations.locations_link_2'}}" 	>
+				<h4 class="services-title">{{lang 'ap-base-1.locations.locations_title_2'}}</h4> 
+			</a>
+            <p class="services-des">{{#replace '<br>' (lang 'ap-base-1.locations.locations_des_2')}}<br>{{/replace}}</p>
+
+        </div>     
+    </div>  
+    <div class="location-item order no-padding">
+        <div class="services-wrap">
+			<i class="ct-img ct-icon-location-h "></i>
+            <a href="{{lang 'ap-base-1.locations.locations_link_3'}}" 	>
+				<h4 class="services-title">{{lang 'ap-base-1.locations.locations_title_3'}}</h4> 
+			</a>
+            <p class="services-des">{{#replace '<br>' (lang 'ap-base-1.locations.locations_des_3')}}<br>{{/replace}}</p>
+
+        </div>     
+    </div>  
+    <div class="location-item order no-padding">
+        <div class="services-wrap">
+			<i class="ct-img ct-icon-location-h "></i>
+            <a href="{{lang 'ap-base-1.locations.locations_link_4'}}" 	>
+				<h4 class="services-title">{{lang 'ap-base-1.locations.locations_title_4'}}</h4> 
+			</a>
+            <p class="services-des">{{#replace '<br>' (lang 'ap-base-1.locations.locations_des_4')}}<br>{{/replace}}</p>
+
+        </div>     
+    </div>  
+    <div class="location-item order no-padding">
+        <div class="services-wrap">
+			<i class="ct-img ct-icon-location-h "></i>
+            <a href="{{lang 'ap-base-1.locations.locations_link_5'}}" 	>
+				<h4 class="services-title">{{lang 'ap-base-1.locations.locations_title_5'}}</h4> 
+			</a>
+            <p class="services-des">{{#replace '<br>' (lang 'ap-base-1.locations.locations_des_5')}}<br>{{/replace}}</p>
+
+        </div>     
+    </div>  	
+</div>
+
+
+	<script>
+		var slick_option = {
+        "dots": false,
+        "arrows": true,
+        "mobileFirst": true,
+        "slidesToShow": 4,
+        "slidesToScroll": 4,
+        "rows":1,
+		"autoplaySpeed": 3000,
+        "autoplay": false,
+		"infinite": false,
+        "responsive": [
+            {
+                "breakpoint": 1260,
+                "settings": "unslick"
+				
+            },
+			{
+                "breakpoint": 992,
+                "settings": {
+                    "slidesToScroll": 4,
+                    "slidesToShow": 4
+                }
+            },
+
+            {
+                "breakpoint": 768,
+                "settings": {
+                    "slidesToScroll": 3,
+                    "slidesToShow": 3
+                }
+            },
+            {
+                "breakpoint": 550,
+                "settings": {
+                    "slidesToScroll": 2,
+                    "slidesToShow": 2
+                }
+            },
+			{
+                "breakpoint": 0,
+                "settings": {
+                    "slidesToScroll": 1,
+                    "slidesToShow": 1
+                }
+            }
+        ]
+    };
+
+    /* Slick needs no get Reinitialized on window Resize after it was destroyed */
+    $(window).on('load resize orientationchange', function() {
+        $('#slick-location').each(function(){
+            var $carousel = $(this);
+            /* Initializes a slick carousel only on mobile screens */
+            // slick on mobile
+            if ($(window).width() >= 1260) {
+                if ($carousel.hasClass('slick-initialized')) {
+                    $carousel.slick('unslick');
+                }
+            }
+            else{
+                if (!$carousel.hasClass('slick-initialized')) {
+                    $carousel.slick(slick_option);
+                }
+            }
+        });
+    });
+
+	</script>
+</div>
+
+

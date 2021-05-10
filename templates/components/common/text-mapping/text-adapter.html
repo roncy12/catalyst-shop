@@ -1,0 +1,26 @@
+<script>
+
+	{{> components/common/text-mapping/shortcode-values }}
+	
+	var _facetName = ['CONSTRUCTION'];
+	var _shortcode;
+	
+	function facetReplacer(_facetName,e){
+		return function(_shortcode){
+			if (typeof _facetData[_facetName][_shortcode] !== 'undefined'){
+				jQuery(e).html(jQuery(e).html().replace(_shortcode,_facetData[_facetName][_shortcode]));
+			}
+		}
+	}
+
+	function facetAdapter(_facetName){
+		// additional info specs-table
+		jQuery('._cf--'+_facetName).each(function(i,e){
+			_shortcode = [jQuery(e).text().split('(')[0].trim()];
+			//console.log(_shortcode);
+			_shortcode.map(facetReplacer(_facetName,e));
+		});
+	}
+	var _facetInit = _facetName.map(facetAdapter);	
+
+</script>

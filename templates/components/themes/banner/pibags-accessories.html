@@ -1,0 +1,29 @@
+<div class="grid grid--no-gutters image-bar clearfix">
+	<div class="section__title">
+        <h2 class="page-heading BebasNeue">
+            {{lang 'ap-base-1.accessories.title' }}
+            <span class="text-des text-center">{{lang 'ap-base-1.accessories.description' }}</span>
+        </h2>
+	</div>
+
+	<div class="ct-card-container row">
+	    {{#each categories}}
+	        {{#if name '==' 'Surf Accessories'}}
+	            {{#if children }}
+	                {{#each children }}
+	                    {{#if image.data }}
+	                    <article class="card  clearfix">
+                			<figure class="card-figure">
+                				<a href="{{ url }}" class="product_img_link">
+                					 <img class="card-image img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+                				</a>
+                			</figure>
+                		</article>
+	                   
+	                    {{/if}}
+	                {{/each}}
+	            {{/if}}
+	        {{/if}}
+	    {{/each}}
+	</div>
+</div>

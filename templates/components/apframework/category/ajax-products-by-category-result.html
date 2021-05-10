@@ -1,0 +1,27 @@
+{{#if category.subcategories }}	
+	{{#each (limit category.subcategories 8) }}
+		{{#if image.data }}
+									<div class="custom-content-slide">
+										<a class="navPage-childList-action navPages-action" href="{{url}}"> 
+										<img class="img-responsive lazyload"  data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image image.data use_default_sizes=true }}" alt="Banner Image - {{ image.alt }}" >
+										<label class="el-item-name">{{name}}</label>
+										</a>
+									</div>
+		{{/if}}
+	{{/each}}		
+{{else}}
+	{{#each (limit category.products 8)}}	
+		{{#if image }}
+		<div class="custom-content-slide">
+			
+				<a class="navPage-childList-action navPages-action" href="{{url}}">
+				<img class="card-image lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image 'productgallery_size' (cdn theme_settings.default_image_product)}}" alt="{{image.alt}}" title="{{image.alt}}">				
+				<label class="el-item-name">{{name}}</label>
+				</a>
+			
+		</div>
+		{{/if}}
+	{{/each}}
+{{/if}}
+
+

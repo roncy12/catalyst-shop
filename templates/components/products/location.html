@@ -1,0 +1,27 @@
+<script>
+	jQuery(document).ready(function(){
+		var _LOCALE_CODE = "{{location}}".trim(); 
+		var _LOCATION_NAME = {
+			'SC':'SAN CLEMENTE CA',
+			'SCD':'SAN CLEMENTE DOWNTOWN CA',
+			'UCF':'ORLANDO (UCF) FL',
+			'MB':'MELBOURNE BEACH FL',
+			'CB':'COCOA BEACH FL'
+		};	
+		
+		function locationDisplay(_LOCALE_CODE, index){
+			if (typeof _LOCATION_NAME[_LOCALE_CODE.trim()] !== 'undefined') {
+				_separator = (index === 0) ? 'Location:' : ','; 
+				jQuery('.p-store-location').append(_separator+' <span class="p-locale"> ' +_LOCATION_NAME[_LOCALE_CODE.trim()] +'</span>');
+			}	
+		}
+	
+		var _LOCALE_ARRAY =  _LOCALE_CODE.split(",");
+        (_LOCALE_CODE != "") ? _LOCALE_ARRAY.map(locationDisplay) : jQuery('.locationinfo').hide();
+		
+	});
+</script>
+
+<div class="locationinfo" >
+	<label class="p-store-location"></label>
+</div>

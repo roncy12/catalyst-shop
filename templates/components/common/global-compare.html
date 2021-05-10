@@ -1,0 +1,120 @@
+	<!-- Product Compare -->
+	<div class=" floating-compare">
+        <a class="navUser-action navUser-item--compare" id="compare-link" href="{{urls.compare}}" data-compare-nav>
+			<div class="to-show-box">
+					<i class="fa fa-plus-square"></i>
+					<label class="to-show"> 
+						{{lang 'common.compare'}}
+						<span class="countPill countPill--positive countPill--alt"></span>
+					
+					</label>
+					
+			</div>
+		</a>
+
+    </div>
+	<div class="dummy-compare" style="display:none!important;"></div>
+	<script>
+		var _site_key = "ctl_";
+		console.log(navigator.userAgent);
+		
+		var isFirefox = (navigator.userAgent.indexOf('Firefox') !== -1);
+		var isEdge = (navigator.userAgent.indexOf('Edge') !== -1);
+		var isIE = (navigator.userAgent.indexOf('.NET') !== -1);
+		
+		jQuery(document).ready(function(){	
+			var _compareList;
+			var _dummyFlag = 0;
+			
+			function urlCompareData(url){
+				url = url.toString();
+				var _pathname='/compare/';
+				if(url.indexOf('/compare/') > -1){
+					var _pathname = '/compare/' + url.split('/compare/')[1];
+				}
+				return _pathname;
+			}
+			
+			function initCompare(){
+				if(location.href.indexOf('/compare/') > -1){
+					_compareList = urlCompareData(location.href)
+					localStorage.setItem(_site_key+'comapare_list', _compareList );
+				}else if(localStorage.getItem(_site_key+'comapare_list') !== null) {
+					_compareList = localStorage.getItem(_site_key+'comapare_list');
+				}else{
+					_compareList = urlCompareData(jQuery('#compare-link').attr('href'));
+					localStorage.setItem(_site_key+'comapare_list',_compareList);
+				}
+			}
+			
+			function compareList(_remove){
+				_remove = typeof _remove !== 'undefined' ? _remove : '';
+				initCompare();
+				var _currentCompareList = _compareList.split('/');
+				_currentCompareList = _currentCompareList.filter( function( item, index, inputArray ) {
+					if(item != _remove){
+					   return inputArray.indexOf(item) == index;
+					}  
+				});
+				
+				_count = _currentCompareList.filter( function( item, index, inputArray ) {
+						if( item != 'compare' && item != _remove){
+							if(_dummyFlag == 0){
+								if(jQuery('#compare-'+item).length > 0 ){
+									jQuery('#compare-'+item).prop('checked',true);
+								}else{
+									if(item){
+										jQuery('.dummy-compare').append('<input type="checkbox" name="products[]" value="'+item+'" id="compare-'+item+'" data-compare-id="'+item+'" class="checkbox-compare add-item-compare">');
+										jQuery('#compare-'+item).prop('checked',true);
+									}
+								}
+							
+								if(!isEdge && !isIE){
+									var el_Checkbox = document.getElementById('compare-'+item);
+									var event;
+									if(typeof(Event) === 'function') {
+										event = new Event('click', { bubbles: true });
+									}else{
+										event = document.createEvent('Event');
+										event.initEvent('click', true, true);
+									}
+									el_Checkbox.dispatchEvent(event);
+								}
+							}
+							return item;
+						}
+				}).length;
+				_dummyFlag=1;
+				
+				_currentCompareList = '/' + _currentCompareList.join('/');
+				localStorage.setItem(_site_key+'comapare_list',_currentCompareList);
+			}
+		
+			jQuery(this).on('DOMSubtreeModified propertychange', '#compare-link', function(){
+				if(jQuery('#compare-link').attr('href') != '/compare'){
+					_newCompareList = urlCompareData(jQuery('#compare-link').attr('href'));
+					localStorage.setItem(_site_key+'comapare_list',_newCompareList);
+				}
+			});
+			
+			
+			jQuery('.clear-compare').click(function(e){
+				e.preventDefault();
+				localStorage.removeItem(_site_key+'comapare_list');
+				location.href="/";
+			});	
+			
+			jQuery('.compareTable-removeProduct').click(function(e){
+				e.preventDefault();
+				_newCompareList = urlCompareData(jQuery(this).attr('href'));
+				localStorage.setItem(_site_key+'comapare_list',_newCompareList  );
+				location.href = jQuery(this).attr('href');
+			});
+			
+			compareList();
+		});
+	
+	</script>
+	
+	
+	<!-- Product Compare -->

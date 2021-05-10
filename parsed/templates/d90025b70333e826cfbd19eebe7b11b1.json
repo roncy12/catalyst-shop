@@ -1,0 +1,3 @@
+{
+  "components/apframework/category/ajax-productCount": "({{ category.total_products }})\n"
+}

@@ -1,0 +1,38 @@
+{{#partial "page"}}
+
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+<main class="page">
+    <section class="page-content page-content--centered">
+		<div class="gr-dropzone" data-gr-zone="gr-dropzone-breadcrumbs">
+			<img class="img-breadcrumbs" src="{{lang 'breadcrumbs-bg.imgNoBlog'}}" alt="" />
+		</div>
+		<div class="cms-content page-404">
+			<div class="cms-content-flex-box">
+				<div class="cms-flex-item-1 border-right-css">
+					<div class="u-textAlignCenter">
+						<h1 class="page-heading">ERROR</h1>
+						<img src="{{cdn 'assets/img/404-image.png'}}" alt="404 Image" class="img-responsive">
+						<p></p>
+						<p><strong>WHOOPS, OUR BAD...</strong></p>
+						<p><a class="button button--primary" href="/surfboards">View SurfBoards</a><a class="button button--primary" href="/">Go Home</a></p>
+					</div>
+				</div>
+				<div class="cms-flex-item-1" >
+					<p class="cms-content-label-title">The page you requested was not found, and we have a fine guess why.</p>
+					<p>If you typed the URL directly, please make sure the spelling is correct.<br>
+					If you clicked on a link to get here, the link is outdated, or the item has sold!</p>
+					<p class="cms-content-label-title">What can you do?</p>
+					<p>Have no fear, help is near! There are many ways you can get back on track with Magento Store.
+					Go back to the previous page.<br>
+					Use the search bar at the top of the page to search for your products.<br>
+					Follow these links to get you back on track!<br>
+					<a href="/">Store Home</a>|<a href="/account.php">My Account</a></p>
+				</div>
+			</div>
+		</div>	
+    </section>
+</main>
+
+{{/partial}}
+{{> layout/base}}

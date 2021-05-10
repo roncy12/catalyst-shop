@@ -1,0 +1,125 @@
+{{#partial "page"}}
+{{inject 'comparisons' comparisons}}
+{{inject 'compareRemoveMessage' (lang 'compare.no_remove')}}
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+<h1 class="page-heading">{{lang 'compare.header' products=comparisons.length}}</h1>
+<a class="clear-compare"><i class="fa fa-times-circle"></i> Clear All</a>
+
+<div class="page">
+    <main class="page-content">
+		<div class="scrollable-table">
+        <table class="compareTable">
+            <tr class="compareTable-row">
+                <th class="compareTable-heading">Product Image</th>
+                {{#each comparisons}}
+                <th class="compareTable-product tbl-fill">
+                    <article class="card">
+						 <a class="compareTable-removeProduct" data-comparison-remove href="{{#if remove_url}}{{remove_url}}{{else}}#{{/if}}">
+                                <svg class="icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-close"></use>
+                                </svg>
+                            </a>
+                        <figure class="card-figure">
+                            <img class="card-image" src="{{getImage image 'product_size' (cdn theme_settings.default_image_product)}}" alt="{{image.alt}}" title="{{image.alt}}">
+                           
+                        </figure>
+                        <div class="card-body">
+                            {{#if brand.name}}
+                                <p class="card-text"><a href="{{brand.url}}">{{ brand.name }}</a></p>
+                            {{/if}}
+                            <h4 class="card-title">
+                                <a href="{{url}}">{{ name }}</a>
+                            </h4>
+                            {{#or ../customer (if ../theme_settings.restrict_to_login '!==' true)}}
+                                {{> components/products/price price=price}}
+                            {{else}}
+                                {{> components/common/login-for-pricing}}
+                            {{/or}}
+                        </div>
+                    </article>
+                </th>
+                {{/each}}
+            </tr>
+            <tr class="compareTable-row tbl-borderless">
+                <th class="compareTable-heading"></th>
+                {{#each comparisons}}
+                    <td class="compareTable-action tbl-fill">
+                        {{#or ../customer (if ../theme_settings.restrict_to_login '!==' true)}}
+                            {{#if show_cart_action}}
+                                {{#if has_options}}
+                                    <a href="{{url}}" class="button button--primary" data-product-id="{{id}}">{{lang 'products.choose_options'}}</a>
+                                {{/if}}
+                                {{#if pre_order}}
+                                    <a href="{{url}}" class="button button--primary" data-product-id="{{id}}">
+                                        {{lang 'products.pre_order'}}
+                                    </a>
+                                {{/if}}
+                                {{#if add_to_cart_url}}
+                                    <a href="{{add_to_cart_url}}" class="button button--primary" data-product-id="{{id}}">
+                                        {{lang 'products.add_to_cart'}}
+                                    </a>
+                                {{/if}}
+                                {{#if out_of_stock_message}}
+                                    <a href="{{url}}" class="button button--primary" data-product-id="{{id}}">{{out_of_stock_message}}</a>
+                                {{/if}}
+                            {{/if}}
+                        {{/or}}
+                    </td>
+                {{/each}}
+            </tr>
+			<!--
+            <tr class="compareTable-row">
+                <th class="compareTable-heading">
+                    <span class="compareTable-headingText">Description</span>
+                </th>
+                {{#each comparisons}}
+                <td class="compareTable-item tbl-fill">{{ summary }}</td>
+                {{/each}}
+            </tr>
+			-->
+            {{#if settings.show_product_rating}}
+                <tr class="compareTable-row">
+                    <th class="compareTable-heading">
+                        <span class="compareTable-headingText">Rating</span>
+                    </th>
+                    {{#each comparisons}}
+                    <td class="compareTable-item tbl-fill">
+                        {{#if rating}}
+                            {{> components/products/ratings rating=rating}}
+                        {{else}}
+                            No Reviews
+                    {{/if}}
+                    </td>
+                    {{/each}}
+                </tr>
+            {{/if}}
+            <tr class="compareTable-row">
+                <th class="compareTable-heading">
+                    <span class="compareTable-headingText">Availability</span>
+                </th>
+                {{#each comparisons}}
+                <td class="compareTable-item  tbl-fill">
+					<label class="stock-availability">
+                   {{#or add_to_cart_url has_options pre_order}}
+						{{#if pre_order}}
+						<span class="instock">Pre-Oder</span>
+						{{else}}
+						<span class="instock">In Stock</span>
+						{{/if}}
+					{{else}}	
+						<span class="outofstock">Out Of Stock</span>
+					{{/or}}
+					</label>
+                </td>
+                {{/each}}
+            </tr>
+			{{> components/products/custom_fields comparisons=comparisons custom_label='CONSTRUCTION,MODEL,LENGTH,Width/Thickness,LITERS,FINS,SERIAL,LOCALE,Other Details' page_template='compare' }}
+			
+        </table>
+
+    </main>
+	</div>
+</div>
+
+{{/partial}}
+{{> layout/base}}

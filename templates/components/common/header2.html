@@ -1,0 +1,60 @@
+<header id="header" class="header header2" role="banner">
+<div class="topbar">
+    {{> components/common/navigation}}
+</div>
+    <div class="header_nav {{#if theme_settings.floatheader}}stop-float{{/if}}">
+    <div class="header_nav-fix  clearfix">
+         <a href="#" class="mobileMenu-toggle" data-mobile-menu-toggle="menu">
+            <span class="mobileMenu-toggleIcon">Toggle menu</span>
+        </a>
+         {{#if template_file '===' 'pages/home'}}
+            <h1 class="header-logo header-logo--{{theme_settings.logo-position}}">
+                {{> components/common/store-logo}}
+            </h1>
+        {{else}}
+            <div class="header-logo header-logo--{{theme_settings.logo-position}}">
+                {{> components/common/store-logo}}
+            </div>
+        {{/if}}
+        <div class="header__right pull-right">
+                <ul>
+               {{#if settings.show_wishlist}}
+                 {{#if account_page '===' 'wishlists'}}
+                     <li class="navUser-item is-active">
+                         <span class="icons icon_heart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 471.7 471.7"><path d="M433.6 67c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7 13.6-92.4 38.3l-12.9 12.9 -13.1-13.1c-24.7-24.7-57.6-38.4-92.5-38.4 -34.8 0-67.6 13.6-92.2 38.2 -24.7 24.7-38.3 57.5-38.2 92.4 0 34.9 13.7 67.6 38.4 92.3l187.8 187.8c2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-3.9l188.2-187.5c24.7-24.7 38.3-57.5 38.3-92.4C471.8 124.5 458.3 91.7 433.6 67zM414.4 232.7l-178.7 178 -178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3s10.7-53.7 30.3-73.2c19.5-19.5 45.5-30.3 73.1-30.3 27.7 0 53.8 10.8 73.4 30.4l22.6 22.6c5.3 5.3 13.8 5.3 19.1 0l22.4-22.4c19.6-19.6 45.7-30.4 73.3-30.4 27.6 0 53.6 10.8 73.2 30.3 19.6 19.6 30.3 45.6 30.3 73.3C444.8 187.1 434 213.1 414.4 232.7z"/></svg></span><span class="hidden">{{lang 'account.nav.wishlists' num_wishlists=customer.num_wishlists}}</span></li>
+                 {{else}}
+                     <li class="navUser-item">
+                         <a class="navUser-action" title="Wishlist" href="{{urls.account.wishlists.all}}">
+                           <span class="icons icon_heart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 471.7 471.7"><path d="M433.6 67c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7 13.6-92.4 38.3l-12.9 12.9 -13.1-13.1c-24.7-24.7-57.6-38.4-92.5-38.4 -34.8 0-67.6 13.6-92.2 38.2 -24.7 24.7-38.3 57.5-38.2 92.4 0 34.9 13.7 67.6 38.4 92.3l187.8 187.8c2.6 2.6 6.1 4 9.5 4 3.4 0 6.9-1.3 9.5-3.9l188.2-187.5c24.7-24.7 38.3-57.5 38.3-92.4C471.8 124.5 458.3 91.7 433.6 67zM414.4 232.7l-178.7 178 -178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3s10.7-53.7 30.3-73.2c19.5-19.5 45.5-30.3 73.1-30.3 27.7 0 53.8 10.8 73.4 30.4l22.6 22.6c5.3 5.3 13.8 5.3 19.1 0l22.4-22.4c19.6-19.6 45.7-30.4 73.3-30.4 27.6 0 53.6 10.8 73.2 30.3 19.6 19.6 30.3 45.6 30.3 73.3C444.8 187.1 434 213.1 414.4 232.7z"/></svg></span><span class="hidden">{{lang 'account.nav.wishlists' num_wishlists=customer.num_wishlists}}</span>
+                           <span class="hidden">{{lang 'account.nav.wishlists' num_wishlists=customer.num_wishlists}}</span>
+                         </a>
+                     </li>
+                 {{/if}}
+             {{/if}}
+             <li class="navUser-item">
+                 <a class="navUser-action navUser-action--quickSearch" href="#" data-search="quickSearch" aria-controls="quickSearch" aria-expanded="false">
+                     <span class="hidden">{{lang 'common.search'}}</span>
+                     <span class="icons icon_search"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"><path d="M51.6 96.7c11 0 21-3.9 28.8-10.5l35 35c0.8 0.8 1.8 1.2 2.9 1.2s2.1-0.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-35-35c6.5-7.8 10.5-17.9 10.5-28.8 0-24.9-20.2-45.1-45.1-45.1C26.8 6.5 6.5 26.8 6.5 51.6 6.5 76.5 26.8 96.7 51.6 96.7zM51.6 14.7c20.4 0 36.9 16.6 36.9 36.9C88.5 72 72 88.5 51.6 88.5c-20.4 0-36.9-16.6-36.9-36.9C14.7 31.3 31.3 14.7 51.6 14.7z"/></svg></span>
+                 </a>
+             </li>
+             <li class="navUser-item navUser-item--cart">
+                 <a
+                     class="navUser-action"
+                     data-cart-preview
+                     data-dropdown="cart-preview-dropdown"
+                     data-options="align:right"
+                     href="{{urls.cart}}">
+                     <span class="icons icon_cart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path d="M20 6V5c0-2.8-2.2-5-5-5s-5 2.2-5 5v1H4v24h22V6H20zM12 5c0-1.7 1.3-3 3-3s3 1.3 3 3v1h-6V5zM24 28H6V8h4v3h2V8h6v3h2V8h4V28z"/></svg></span>
+                     <span class="hidden navUser-item-cartLabel">{{lang 'common.cart'}}</span>
+                     <span class="countPill{{#if cart.items}} countPill--positive{{/if}} cart-quantity">{{cart.quantity}}</span>
+                 </a>
+                 <div class="dropdown-menu" id="cart-preview-dropdown" data-dropdown-content aria-hidden="true"></div>
+             </li>
+                </ul> 
+             </div>
+        <div class="navPages-container" id="menu" data-menu>
+            {{> components/common/navigation-menu}}
+        </div>
+        </div>
+    </div>
+</header>
